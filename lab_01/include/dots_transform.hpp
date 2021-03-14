@@ -2,6 +2,8 @@
 
 #include "dot.hpp"
 
+#define PI 3.1415
+
 struct move {
     double x;
     double y;
@@ -17,3 +19,11 @@ struct scale {
 };
 
 using scale_t = struct scale;
+
+struct rotate {
+    double ax;
+    double ay;
+    double az;
+};
+
+using rotate_t = struct rotate;
