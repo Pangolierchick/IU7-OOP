@@ -4,6 +4,8 @@ project(lab_01 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+set(CMAKE_PREFIX_PATH /usr/local/opt/qt5)
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -11,43 +13,41 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check https://doc.qt.io/qt/deployment-android.html for more information.
-# They need to be set before the find_package( ...) calls below.
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
+set(SOURCE_DIR src)
+set(INCLUDE_DIR include)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+add_definitions(-Wall -Wextra -O2 -I ${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
 
 set(PROJECT_SOURCES
-        main.cpp
+        ${SOURCE_DIR}/main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        ${SOURCE_DIR}/edge.cpp
+        ${SOURCE_DIR}/dot.cpp
+        ${SOURCE_DIR}/model.cpp
+        ${INCLUDE_DIR}/edge.hpp
+        ${INCLUDE_DIR}/dot.hpp
+        ${INCLUDE_DIR}/model.hpp
+        ${INCLUDE_DIR}/main.hpp
+        ${INCLUDE_DIR}/dots_arr.hpp
+        ${INCLUDE_DIR}/dot_io.hpp
+        ${SOURCE_DIR}/dots_arr.cpp
+        ${SOURCE_DIR}/dot_io.cpp
+        ${SOURCE_DIR}/edges_arr.cpp
+        ${INCLUDE_DIR}/edges_arr.hpp
+        ${SOURCE_DIR}/edges_io.cpp
+        ${INCLUDE_DIR}/edges_io.hpp
+        ${SOURCE_DIR}/model_io.cpp
+        ${INCLUDE_DIR}/model_io.hpp
+        ${SOURCE_DIR}/dots_transform.cpp
+        ${INCLUDE_DIR}/dots_transform.hpp
+
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(lab_01
-        ${PROJECT_SOURCES}
-    )
-else()
-    if(ANDROID)
-        add_library(lab_01 SHARED
-            ${PROJECT_SOURCES}
-        )
-    else()
-        add_executable(lab_01
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
 
-target_link_libraries(lab_01 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+add_executable(lab_01 ${PROJECT_SOURCES})
+
+target_link_libraries(lab_01 Qt5::Widgets)

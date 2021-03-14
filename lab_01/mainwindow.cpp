@@ -13,3 +13,28 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_rotateButton_clicked()
+{
+
+}
+
+void MainWindow::on_moveButton_clicked()
+{
+
+}
+
+void MainWindow::on_scaleButton_clicked()
+{
+
+}
+
+void MainWindow::on_loadModelButton_clicked()
+{
+
+}
+
+void MainWindow::on_saveModelButton_clicked()
+{
+
+}
