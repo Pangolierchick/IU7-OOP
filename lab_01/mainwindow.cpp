@@ -1,3 +1,4 @@
+#include <cstdio>
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
@@ -6,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    scene->setSceneRect(0, 0, WIN_X, WIN_Y);
 }
 
 MainWindow::~MainWindow()

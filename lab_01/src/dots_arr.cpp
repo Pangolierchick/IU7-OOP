@@ -1,3 +1,4 @@
+#include "cstdio"
 #include "dots_arr.hpp"
 #include "defines.hpp"
 
@@ -12,6 +13,8 @@ dots_arr_t init_dots_array(dot_t *dots, const unsigned int dots_num) {
 
 
 int allocate_dots(dots_arr_t &dots_arr, const unsigned int dots_num) {
+    printf("Allocation %d dots\n", dots_num);
+    
     dots_arr.dots = new dot_t[dots_num]; 
 
     if (dots_arr.dots != nullptr) {

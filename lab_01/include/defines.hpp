@@ -1,4 +1,4 @@
 #pragma once
 
 #define OK                      0
-#define ALLOC_ERROR             1
+#define ALLOC_ERROR             0xff

@@ -48,5 +48,7 @@ void scale_dot(dot_t &dot, const scale_t &scale) {
 }
 
 void rotate_dot(dot_t &dot, const rotate_t &rotate) {
-    
+    x_rotate_dot(dot, rotate.ax);
+    y_rotate_dot(dot, rotate.ay);
+    z_rotate_dot(dot, rotate.az);
 }

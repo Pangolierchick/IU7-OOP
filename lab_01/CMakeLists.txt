@@ -44,6 +44,11 @@ set(PROJECT_SOURCES
         ${INCLUDE_DIR}/model_io.hpp
         ${SOURCE_DIR}/dots_transform.cpp
         ${INCLUDE_DIR}/dots_transform.hpp
+        ${SOURCE_DIR}/model_transform.cpp
+        ${INCLUDE_DIR}/model_transform.hpp
+        ${SOURCE_DIR}/manager.cpp
+        ${INCLUDE_DIR}/manager.hpp
+        ${INCLUDE_DIR}/commands.hpp
 
 )
 

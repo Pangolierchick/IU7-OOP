@@ -1,6 +1,7 @@
 #include <cstdio>
 #include "dot_io.hpp"
 #include "dots_arr.hpp"
+#include "defines.hpp"
 
 static int read_dots_num(FILE *file) {
     int ndots;
@@ -14,11 +15,11 @@ static int read_points(dots_arr_t &dots, FILE *file) {
     int read_res = 3;
 
     while (read_res == 3 && dot_num < dots.n_dots) {
-        read_res = fscanf(file, "%lf %lf %lf", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].y);
+        read_res = fscanf(file, "%lf %lf %lf", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].z);
         dot_num++;
     }
     
-    return read_res == 3;
+    return read_res != 3;
 }
 
 int get_dots(dots_arr_t &dots, FILE *file) {
@@ -29,9 +30,14 @@ int get_dots(dots_arr_t &dots, FILE *file) {
     if (dots_num == -1)
         return BAD_DOTS_NUM;
     
-    int rc = 0;
+    
+    if (allocate_dots(tmp_dots_arr, dots_num)) {
+        return ALLOC_ERROR;
+    }
+    
+    int rc = read_points(tmp_dots_arr, file);
 
-    if ((rc = read_points(tmp_dots_arr, file)))
+    if (rc)
         destroy_dots(tmp_dots_arr);
     else {
         dots.dots = tmp_dots_arr.dots;

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#define WIN_X   841
+#define WIN_Y   661
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

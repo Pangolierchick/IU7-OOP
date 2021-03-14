@@ -14,53 +14,51 @@ static int read_edges_num(FILE *file) {
 }
 
 static int read_edge(FILE *file, int *ld, int *rd) {
-    return fscanf(file, "%d %d", ld, rd) != 2;
+    return fscanf(file, "%d %d", ld, rd);
 }
 
-int get_edges(edges_arr_t &edges_arr, FILE *file) {
-    auto dots_arr = init_dots_array();
-    int rc;
+static int read_edges(FILE *file, edges_arr_t &edges_arr) {
+    int i = 0;
+    int rc = 2;
 
-    if ((rc = get_dots(dots_arr, file))) {
-        destroy_dots(dots_arr);
-        return rc;
-    }
-
-    auto tmp_edges_arr = init_edges_arr();
-
-    auto nedges = read_edges_num(file);
-
-    if (nedges == -1)
-        return BAD_DOTS_NUM;
-
-    if ((rc = allocate_edges(tmp_edges_arr, nedges))) {
-        destroy_dots(dots_arr);
-        return rc;
-    }
-
-    unsigned int i = 0;
-    int read_edge_res = 0;
-
-    while (i < tmp_edges_arr.edges_num && read_edge_res == 0) {
+    while (i < edges_arr.edges_num && rc == 2) {
         int ld;
         int rd;
 
-        read_edge_res = read_edge(file, &ld, &rd);
-
-        if (read_edge_res == OK) {
-            auto edge = init_edge(get_dot(dots_arr, ld), get_dot(dots_arr, rd));
-
-            tmp_edges_arr.edges[i] = edge;
-        }
-
+        rc = read_edge(file, &ld, &rd);
+        edges_arr.edges[i] = init_edge(ld, rd);
+        
         i++;
     }
 
-    if (read_edge_res == OK) {
-        edges_arr.edges = tmp_edges_arr.edges;
-        edges_arr.edges_num = tmp_edges_arr.edges_num;
+    printf("Rc after read edges %d\n", rc);
+
+    return rc != 2;
+}
+
+int get_edges(edges_arr_t &edges_arr, FILE *file) {
+    int edge_num = read_edges_num(file);
+
+    if (edge_num < 0) {
+        return BAD_EDGES_NUM;
     }
 
-    return read_edge_res;
+    edges_arr_t edges = init_edges_arr();
+
+    if (allocate_edges(edges, edge_num) == ALLOC_ERROR) {
+        return ALLOC_ERROR;
+    }
+
+    int rs = read_edges(file, edges);
+
+    if (rs)
+        destroy_edges(edges);
+    else {
+
+        edges_arr.edges = edges.edges;
+        edges_arr.edges_num = edges.edges_num;
+    }
+    
+    return rs;
 }
 
