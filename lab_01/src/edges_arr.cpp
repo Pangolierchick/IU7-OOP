@@ -22,6 +22,6 @@ int allocate_edges(edges_arr_t &edges, unsigned int en) {
     return ALLOC_ERROR;
 }
 
-void destroy_edges(edges_arr_t &edges) {
+void destroy_edges(const edges_arr_t &edges) {
     delete edges.edges;
 }

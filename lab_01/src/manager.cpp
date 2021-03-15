@@ -1,5 +1,6 @@
 #include "manager.hpp"
 #include "model.hpp"
+#include "draw.hpp"
 #include "model_io.hpp"
 
 int task_manager(const event_t &event, event_data_t &data) {
@@ -9,7 +10,7 @@ int task_manager(const event_t &event, event_data_t &data) {
     
     switch (event.cmd) {
         case MOVE:
-            res = rotate_model(model, data.rotate);
+            res = move_model(model, data.move);
             break;
         case SCALE:
             res = scale_model(model, data.scale);
@@ -18,6 +19,7 @@ int task_manager(const event_t &event, event_data_t &data) {
             res = rotate_model(model, data.rotate);
             break;
         case DRAW:
+            res = draw_model(model, data.field);
             break;
         case LOAD_FROM_FILE:
             res = read_from_file(model, data.input_filename);

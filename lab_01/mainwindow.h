@@ -3,8 +3,11 @@
 
 #include <QMainWindow>
 
-#define WIN_X   841
-#define WIN_Y   661
+#define WIN_X               841
+#define WIN_Y               661
+
+#define GRAPHIC_START_X     300
+#define GRAPHIC_START_Y     60
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +31,8 @@ private slots:
     void on_loadModelButton_clicked();
 
     void on_saveModelButton_clicked();
+
+    int drawModel();
 
 private:
     Ui::MainWindow *ui;

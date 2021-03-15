@@ -8,7 +8,7 @@
 
 static int read_edges_num(FILE *file) {
     int nedges;
-    int rc = fscanf(file, "%u", &nedges);
+    int rc = fscanf(file, "%d", &nedges);
 
     return rc == 1 ? nedges : -1;
 }
@@ -18,7 +18,7 @@ static int read_edge(FILE *file, int *ld, int *rd) {
 }
 
 static int read_edges(FILE *file, edges_arr_t &edges_arr) {
-    int i = 0;
+    unsigned int i = 0;
     int rc = 2;
 
     while (i < edges_arr.edges_num && rc == 2) {
@@ -54,7 +54,6 @@ int get_edges(edges_arr_t &edges_arr, FILE *file) {
     if (rs)
         destroy_edges(edges);
     else {
-
         edges_arr.edges = edges.edges;
         edges_arr.edges_num = edges.edges_num;
     }

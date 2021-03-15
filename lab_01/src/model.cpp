@@ -18,17 +18,17 @@ model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
     edges_arr_t edges = { nullptr, 0 };
     
     if (ea) {
-        edges.edges   = ea->edges;
+        edges.edges     = ea->edges;
         edges.edges_num = ea->edges_num;
     }
 
-    model.dots = dots;
+    model.dots  = dots;
     model.edges = edges;
 
     return model;
 }
 
-void destroy_model(model_t &model) {
+void destroy_model(const model_t &model) {
     destroy_dots(model.dots);
     destroy_edges(model.edges);
 }

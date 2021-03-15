@@ -18,7 +18,9 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 set(SOURCE_DIR src)
 set(INCLUDE_DIR include)
 
-add_definitions(-Wall -Wextra -O2 -I ${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
+
+add_definitions(-Wall -Wextra -O2)
 
 set(PROJECT_SOURCES
         ${SOURCE_DIR}/main.cpp
@@ -49,9 +51,10 @@ set(PROJECT_SOURCES
         ${SOURCE_DIR}/manager.cpp
         ${INCLUDE_DIR}/manager.hpp
         ${INCLUDE_DIR}/commands.hpp
-
+        draw.cpp
+        draw.hpp
+        ${INCLUDE_DIR}/logger.h
 )
-
 
 add_executable(lab_01 ${PROJECT_SOURCES})
 

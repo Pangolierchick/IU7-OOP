@@ -1,7 +1,7 @@
 #include "model_transform.hpp"
 #include "defines.hpp"
 
-int move_model(model_t &model, move_t &move) {
+int move_model(const model_t &model, const move_t &move) {
     auto dot_arr = model.dots;
 
     if (dot_arr.dots == nullptr)
@@ -15,7 +15,7 @@ int move_model(model_t &model, move_t &move) {
 }
 
 
-int rotate_model(model_t &model, rotate_t &rotate) {
+int rotate_model(const model_t &model, const rotate_t &rotate) {
     auto dot_arr = model.dots;
 
     if (dot_arr.dots == nullptr)
@@ -29,7 +29,7 @@ int rotate_model(model_t &model, rotate_t &rotate) {
 }
 
 
-int scale_model(model_t &model, scale_t &scale) {
+int scale_model(const model_t &model, const scale_t &scale) {
     auto dot_arr = model.dots;
 
     if (dot_arr.dots == nullptr)

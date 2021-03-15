@@ -5,7 +5,7 @@
 
 static int read_dots_num(FILE *file) {
     int ndots;
-    int rc = fscanf(file, "%u", &ndots);
+    int rc = fscanf(file, "%d", &ndots);
 
     return rc == 1 ? ndots : -1;
 }

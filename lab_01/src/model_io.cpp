@@ -28,6 +28,10 @@ int get_model(model_t &model, FILE *file) {
 }
 
 int read_from_file(model_t &model, const char *filename) {
+    if (model.dots.dots != nullptr) {
+        return ALREADY_LOADED;
+    }
+    
     FILE *f = fopen(filename, "r");
 
     if (f == NULL) {
@@ -42,7 +46,7 @@ static int dump_dots(const model_t &model, FILE *file) {
     dots_arr_t dot_arr = model.dots;
 
     if (dot_arr.dots) {
-        fprintf(file, "%d\n", dot_arr.n_dots);
+        fprintf(file, "%u\n", dot_arr.n_dots);
         for (unsigned int i = 0; i < dot_arr.n_dots; i++)
             fprintf(file, "%lf %lf %lf\n", dot_arr.dots[i].x, dot_arr.dots[i].y, dot_arr.dots[i].z);
     }
@@ -56,7 +60,7 @@ static int dump_edges(const model_t &model, FILE *file) {
     edges_arr_t edge_arr = model.edges;
 
     if (edge_arr.edges) {
-        fprintf(file, "%d\n", edge_arr.edges_num);
+        fprintf(file, "%u\n", edge_arr.edges_num);
 
         for (unsigned int i = 0; i < edge_arr.edges_num; i++)
             fprintf(file, "%d %d\n", edge_arr.edges[i].d1, edge_arr.edges[i].d2);
@@ -67,7 +71,7 @@ static int dump_edges(const model_t &model, FILE *file) {
     return OK;
 }
 
-int save_to_file(model_t &model, const char *filename) {
+int save_to_file(const model_t &model, const char *filename) {
     FILE *f = fopen(filename, "w");
 
     if (f == NULL) {
