@@ -1,7 +1,7 @@
 #include <cstdio>
 #include "dot_io.hpp"
 #include "dots_arr.hpp"
-#include "defines.hpp"
+#include "error.hpp"
 
 static int read_dots_num(FILE *file) {
     int ndots;
@@ -14,7 +14,7 @@ static int read_points(dots_arr_t &dots, FILE *file) {
     unsigned int dot_num = 0;
     int read_res = 3;
 
-    while (read_res == 3 && dot_num < dots.n_dots) {
+    while (read_res == 3 && dot_num < get_dots_num(dots)) {
         read_res = fscanf(file, "%lf %lf %lf", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].z);
         dot_num++;
     }

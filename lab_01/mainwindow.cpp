@@ -3,6 +3,7 @@
 #include "./ui_mainwindow.h"
 #include "draw.hpp"
 #include "logger.h"
+#include "error.hpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,10 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QGraphicsScene *scene = new QGraphicsScene(this);
+    QGraphicsScene *scene = new QGraphicsScene(0, 0, WIN_X, WIN_Y, this);
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignRight);
-    scene->setSceneRect(GRAPHIC_START_X, GRAPHIC_START_Y, WIN_X, WIN_Y);
 }
 
 MainWindow::~MainWindow()
@@ -45,6 +44,7 @@ int MainWindow::drawModel() {
     int res = task_manager(event, event_d);
 
     if (res) {
+        error_manager(res);
         ERROR_PRINT("Draw model failed. Error code %d\n", res);
     }
 
@@ -67,6 +67,7 @@ void MainWindow::on_rotateButton_clicked()
 
     int res = task_manager(event, event_d);
     if (res) {
+        error_manager(res);
         ERROR_PRINT("Rotate failed. Error code %d\n", res);
     }
     else {
@@ -129,6 +130,7 @@ void MainWindow::on_loadModelButton_clicked()
     int res = task_manager(event, event_d);
 
     if (res) {
+        error_manager(res);
         ERROR_PRINT("Load failed. Error code %d\n", res);
     }
     else {
@@ -147,6 +149,7 @@ void MainWindow::on_saveModelButton_clicked()
     int res = task_manager(event, event_d);
 
     if (res) {
+        error_manager(res);
         ERROR_PRINT("Save failed. Error code %d\n", res);
     }
     else {

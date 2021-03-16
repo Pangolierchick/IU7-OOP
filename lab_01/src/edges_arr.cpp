@@ -1,6 +1,6 @@
 #include <cstdio>
 #include "edges_arr.hpp"
-#include "defines.hpp"
+#include "error.hpp"
 
 edges_arr_t init_edges_arr(edge_t *edges, unsigned int en) {
     edges_arr_t edge_arr;
@@ -24,4 +24,12 @@ int allocate_edges(edges_arr_t &edges, unsigned int en) {
 
 void destroy_edges(const edges_arr_t &edges) {
     delete edges.edges;
+}
+
+unsigned int get_edges_num(edges_arr_t &edges) {
+    return edges.edges_num;
+}
+
+edge_t& get_edge(edges_arr_t &edges, int ind) {
+    return edges.edges[ind];
 }

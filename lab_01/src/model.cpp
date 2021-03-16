@@ -3,7 +3,7 @@
 #include "model.hpp"
 #include "dot_io.hpp"
 #include "edges_io.hpp"
-#include "defines.hpp"
+#include "error.hpp"
 
 model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
     model_t model;
@@ -26,6 +26,14 @@ model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
     model.edges = edges;
 
     return model;
+}
+
+dots_arr_t& get_dots_arr(model_t &model) {
+    return model.dots;
+}
+
+edges_arr_t& get_edges_arr(model_t &model) {
+    return model.edges;
 }
 
 void destroy_model(const model_t &model) {

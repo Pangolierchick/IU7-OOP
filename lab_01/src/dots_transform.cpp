@@ -2,7 +2,7 @@
 #include "dots_transform.hpp"
 
 static inline double to_radians(double angle) {
-    return angle * (PI / 180);
+    return angle * (PI / 180.0);
 }
 
 

@@ -31,6 +31,8 @@ set(PROJECT_SOURCES
         ${SOURCE_DIR}/dot.cpp
         ${SOURCE_DIR}/model.cpp
         ${INCLUDE_DIR}/edge.hpp
+        ${INCLUDE_DIR}/error.hpp
+        ${SOURCE_DIR}/error.cpp
         ${INCLUDE_DIR}/dot.hpp
         ${INCLUDE_DIR}/model.hpp
         ${INCLUDE_DIR}/main.hpp

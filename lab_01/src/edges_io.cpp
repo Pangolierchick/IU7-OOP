@@ -4,7 +4,7 @@
 #include "edges_arr.hpp"
 #include "dot_io.hpp"
 #include "dots_arr.hpp"
-#include "defines.hpp"
+#include "error.hpp"
 
 static int read_edges_num(FILE *file) {
     int nedges;
@@ -21,7 +21,7 @@ static int read_edges(FILE *file, edges_arr_t &edges_arr) {
     unsigned int i = 0;
     int rc = 2;
 
-    while (i < edges_arr.edges_num && rc == 2) {
+    while (i < get_edges_num(edges_arr) && rc == 2) {
         int ld;
         int rd;
 
@@ -30,8 +30,6 @@ static int read_edges(FILE *file, edges_arr_t &edges_arr) {
         
         i++;
     }
-
-    printf("Rc after read edges %d\n", rc);
 
     return rc != 2;
 }

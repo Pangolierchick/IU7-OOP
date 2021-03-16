@@ -3,11 +3,11 @@
 
 #include <QMainWindow>
 
-#define WIN_X               841
-#define WIN_Y               661
+#define WIN_X               911
+#define WIN_Y               771
 
-#define GRAPHIC_START_X     300
-#define GRAPHIC_START_Y     60
+#define GRAPHIC_START_X     270
+#define GRAPHIC_START_Y     0
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -2,7 +2,7 @@
 #include "model.hpp"
 #include "model_io.hpp"
 #include "edges_io.hpp"
-#include "defines.hpp"
+#include "error.hpp"
 #include "edges_io.hpp"
 #include "dot_io.hpp"
 
@@ -38,7 +38,11 @@ int read_from_file(model_t &model, const char *filename) {
         return READ_ERROR;
     }
 
-    return get_model(model, f);
+    int res = get_model(model, f);
+
+    fclose(f);
+
+    return res;
 }
 
 

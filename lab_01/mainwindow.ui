@@ -233,10 +233,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>60</y>
-      <width>841</width>
-      <height>661</height>
+      <x>270</x>
+      <y>0</y>
+      <width>911</width>
+      <height>771</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -247,8 +247,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="maximumSize">
      <size>
-      <width>841</width>
-      <height>661</height>
+      <width>1000</width>
+      <height>1000</height>
      </size>
     </property>
     <property name="sizeIncrement">
@@ -256,6 +256,9 @@ p, li { white-space: pre-wrap; }
       <width>0</width>
       <height>0</height>
      </size>
+    </property>
+    <property name="cursor" stdset="0">
+     <cursorShape>CrossCursor</cursorShape>
     </property>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_4">

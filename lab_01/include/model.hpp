@@ -14,3 +14,6 @@ using model_t = struct model;
 
 model_t init_model(dots_arr_t *da=nullptr, edges_arr_t *ea=nullptr);
 void destroy_model(const model_t &model);
+
+dots_arr_t& get_dots_arr(model_t &model);
+edges_arr_t& get_edges_arr(model_t &model);
