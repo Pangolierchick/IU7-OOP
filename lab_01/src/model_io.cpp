@@ -28,7 +28,8 @@ int get_model(model_t &model, FILE *file) {
 }
 
 int read_from_file(model_t &model, const char *filename) {
-    if (model.dots.dots != nullptr) {
+    auto dots = get_dots_arr(model);
+    if (dots.dots != nullptr) {
         return ALREADY_LOADED;
     }
     
@@ -47,12 +48,15 @@ int read_from_file(model_t &model, const char *filename) {
 
 
 static int dump_dots(const model_t &model, FILE *file) {
-    dots_arr_t dot_arr = model.dots;
+    dots_arr_t dot_arr = get_dots_arr((model_t &) model);
+    auto ndots = get_dots_num(dot_arr);
 
-    if (dot_arr.dots) {
-        fprintf(file, "%u\n", dot_arr.n_dots);
-        for (unsigned int i = 0; i < dot_arr.n_dots; i++)
-            fprintf(file, "%lf %lf %lf\n", dot_arr.dots[i].x, dot_arr.dots[i].y, dot_arr.dots[i].z);
+    if (ndots) {
+        fprintf(file, "%u\n", ndots);
+        for (unsigned int i = 0; i < ndots; i++) {
+            auto dot = get_dot(dot_arr, i);
+            fprintf(file, "%lf %lf %lf\n", dot.x, dot.y, dot.z);
+        }
     }
 
     fprintf(file, "\n");
@@ -61,13 +65,16 @@ static int dump_dots(const model_t &model, FILE *file) {
 }
 
 static int dump_edges(const model_t &model, FILE *file) {
-    edges_arr_t edge_arr = model.edges;
+    edges_arr_t edge_arr = get_edges_arr((model_t &) model);
+    auto nedges = get_edges_num(edge_arr);
 
-    if (edge_arr.edges) {
-        fprintf(file, "%u\n", edge_arr.edges_num);
+    if (nedges) {
+        fprintf(file, "%u\n", nedges);
 
-        for (unsigned int i = 0; i < edge_arr.edges_num; i++)
-            fprintf(file, "%d %d\n", edge_arr.edges[i].d1, edge_arr.edges[i].d2);
+        for (unsigned int i = 0; i < nedges; i++) {
+            auto edge = get_edge(edge_arr, i);
+            fprintf(file, "%d %d\n", edge.d1, edge.d2);
+        }
     }
 
     fprintf(file, "\n");
