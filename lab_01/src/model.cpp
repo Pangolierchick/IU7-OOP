@@ -36,7 +36,7 @@ edges_arr_t& get_edges_arr(model_t &model) {
     return model.edges;
 }
 
-void destroy_model(const model_t &model) {
+void destroy_model(model_t &model) {
     destroy_dots(model.dots);
     destroy_edges(model.edges);
 }

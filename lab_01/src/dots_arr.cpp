@@ -23,8 +23,10 @@ int allocate_dots(dots_arr_t &dots_arr, const unsigned int dots_num) {
     return ALLOC_ERROR;
 }
 
-void destroy_dots(const dots_arr_t &dots_arr) {
+void destroy_dots(dots_arr_t &dots_arr) {
     delete dots_arr.dots;
+    dots_arr.dots = nullptr;
+    dots_arr.n_dots = 0;
 }
 
 dot_t& get_dot(const dots_arr_t &dots_arr, int ind) {

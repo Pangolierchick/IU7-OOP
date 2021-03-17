@@ -29,8 +29,9 @@ int get_model(model_t &model, FILE *file) {
 
 int read_from_file(model_t &model, const char *filename) {
     auto dots = get_dots_arr(model);
+
     if (dots.dots != nullptr) {
-        return ALREADY_LOADED;
+        destroy_model(model);
     }
     
     FILE *f = fopen(filename, "r");
