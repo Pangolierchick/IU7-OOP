@@ -5,6 +5,7 @@
 #include "error.hpp"
 #include "edges_io.hpp"
 #include "dot_io.hpp"
+#include "logger.h"
 
 int get_model(model_t &model, FILE *file) {
     auto dots  = init_dots_array();
@@ -30,9 +31,6 @@ int get_model(model_t &model, FILE *file) {
 int read_from_file(model_t &model, const char *filename) {
     auto dots = get_dots_arr(model);
 
-    if (dots.dots != nullptr) {
-        destroy_model(model);
-    }
     
     FILE *f = fopen(filename, "r");
 
@@ -40,7 +38,22 @@ int read_from_file(model_t &model, const char *filename) {
         return READ_ERROR;
     }
 
-    int res = get_model(model, f);
+    int res = 0;
+
+    if (dots.dots != nullptr) {
+        model_t temp_model = init_model();
+        res = get_model(temp_model, f);
+
+        DBG_PRINT("RES: %d\n", res);
+
+        if (!res) {
+            destroy_model(model);
+            model = temp_model;
+        }
+    }
+    else {
+        res = get_model(model, f);
+    }
 
     fclose(f);
 
