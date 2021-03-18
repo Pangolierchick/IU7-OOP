@@ -2,12 +2,16 @@
 #include "dot_io.hpp"
 #include "dots_arr.hpp"
 #include "error.hpp"
+#include "logger.h"
 
 static int read_dots_num(FILE *file) {
     int ndots;
     int rc = fscanf(file, "%d", &ndots);
 
-    return rc == 1 ? ndots : -1;
+    if (rc != 1 || ndots <= 0)
+        return -1;
+    
+    return ndots;
 }
 
 static int read_points(dots_arr_t &dots, FILE *file) {
@@ -19,7 +23,7 @@ static int read_points(dots_arr_t &dots, FILE *file) {
         dot_num++;
     }
     
-    return read_res != 3;
+    return (read_res != 3) * BAD_DOTS;
 }
 
 int get_dots(dots_arr_t &dots, FILE *file) {

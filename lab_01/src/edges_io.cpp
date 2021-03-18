@@ -5,12 +5,16 @@
 #include "dot_io.hpp"
 #include "dots_arr.hpp"
 #include "error.hpp"
+#include "logger.h"
 
 static int read_edges_num(FILE *file) {
     int nedges;
     int rc = fscanf(file, "%d", &nedges);
 
-    return rc == 1 ? nedges : -1;
+    if (rc != 1 || nedges <= 0)
+        return -1;
+    
+    return nedges;
 }
 
 static int read_edge(FILE *file, int *ld, int *rd) {
@@ -31,7 +35,7 @@ static int read_edges(FILE *file, edges_arr_t &edges_arr) {
         i++;
     }
 
-    return rc != 2;
+    return (rc != 2) * BAD_EDGES;
 }
 
 int get_edges(edges_arr_t &edges_arr, FILE *file) {

@@ -10,5 +10,7 @@
 #define ROTATE_ERROR            7
 #define SCALE_ERROR             8
 #define BAD_DOTS_NUM            9
+#define BAD_EDGES               10
+#define BAD_DOTS                11
 
 void error_manager(int errnum);

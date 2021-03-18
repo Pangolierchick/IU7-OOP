@@ -22,5 +22,13 @@ void error_manager(int errnum) {
         case BAD_EDGES_NUM:
             QMessageBox::critical(NULL, "Ошибка", "Введенно неправильное кол-во ребер.");
             break; 
+        
+        case BAD_DOTS:
+            QMessageBox::critical(NULL, "Ошибка", "Точки должны быть заданы действительными числами.");
+            break;
+
+        case BAD_EDGES:
+            QMessageBox::critical(NULL, "Ошибка", "Связи должны быть заданы целыми числами.");
+            break;
     }
 }
