@@ -30,5 +30,9 @@ void error_manager(int errnum) {
         case BAD_EDGES:
             QMessageBox::critical(NULL, "Ошибка", "Связи должны быть заданы целыми числами.");
             break;
+
+        case BAD_CENTER:
+            QMessageBox::critical(NULL, "Ошибка", "Центр должен быть задан действительными числами.");
+            break;
     }
 }

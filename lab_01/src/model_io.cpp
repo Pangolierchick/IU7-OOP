@@ -8,7 +8,10 @@
 #include "logger.h"
 
 int read_center(dot_t &d, FILE *file) {
-    return fscanf(file, "%lf %lf %lf", &d.x, &d.y, &d.z) != 3;
+    if (fscanf(file, "%lf %lf %lf", &d.x, &d.y, &d.z) != 3)
+        return BAD_CENTER;
+
+    return OK;
 }
 
 int read_model(model_t &model, FILE *file) {
@@ -104,6 +107,14 @@ static int dump_edges(const model_t &model, FILE *file) {
     return OK;
 }
 
+static int dump_center(const model_t &model, FILE *file) {
+    dot_t center = model.center;
+
+    fprintf(file, "%lf %lf %lf\n", center.x, center.y, center.z);
+
+    return OK;
+}
+
 int save_to_file(const model_t &model, const char *filename) {
     FILE *f = fopen(filename, "w");
 
@@ -113,6 +124,7 @@ int save_to_file(const model_t &model, const char *filename) {
 
     dump_dots(model, f);
     dump_edges(model, f);
+    dump_center(model, f);
 
     fclose(f);
 

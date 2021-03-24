@@ -8,7 +8,7 @@ static int read_dots_num(FILE *file) {
     int ndots;
     int rc = fscanf(file, "%d", &ndots);
 
-    if (rc != 1 || ndots <= 0)
+    if (rc != 1)
         return -1;
     
     return ndots;

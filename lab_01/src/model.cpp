@@ -42,7 +42,7 @@ void set_center(model_t &model, dot_t c) {
     model.center = c;
 }
 
-dot_t& get_center(const model_t& model) {
+dot_t& get_center(model_t& model) {
     return model.center;
 }
 

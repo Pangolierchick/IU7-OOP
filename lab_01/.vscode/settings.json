@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "cstdio": "cpp",
+        "ranges": "cpp",
+        "ios": "cpp",
+        "__bit_reference": "cpp",
+        "algorithm": "cpp",
+        "locale": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "atomic": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "system_error": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "*.tcc": "cpp"
+    }
+
+    
+}

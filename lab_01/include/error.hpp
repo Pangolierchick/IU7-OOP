@@ -12,5 +12,6 @@
 #define BAD_DOTS_NUM            9
 #define BAD_EDGES               10
 #define BAD_DOTS                11
+#define BAD_CENTER              12
 
 void error_manager(int errnum);

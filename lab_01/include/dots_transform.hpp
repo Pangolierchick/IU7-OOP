@@ -29,5 +29,5 @@ struct rotate {
 using rotate_t = struct rotate;
 
 void move_dot(dot_t &dot, const move_t &mv);
-void scale_dot(dot_t &dot, const scale_t &scale, const dot_t& center);
-void rotate_dot(dot_t &dot, const rotate_t &rotate, const dot_t& center);
+void scale_dot(dot_t &dot, const scale_t &scale);
+void rotate_dot(dot_t &dot, const rotate_t &rotate);

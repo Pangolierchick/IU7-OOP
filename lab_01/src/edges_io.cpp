@@ -11,7 +11,7 @@ static int read_edges_num(FILE *file) {
     int nedges;
     int rc = fscanf(file, "%d", &nedges);
 
-    if (rc != 1 || nedges <= 0)
+    if (rc != 1)
         return -1;
     
     return nedges;
