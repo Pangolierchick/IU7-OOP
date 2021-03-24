@@ -14,27 +14,31 @@ static int read_dots_num(FILE *file) {
     return ndots;
 }
 
-static int read_points(dots_arr_t &dots, FILE *file) {
-    unsigned int dot_num = 0;
-    int read_res = 3;
+static int read_point(dot_t &dot, FILE *file) {
+    return fscanf(file, "%lf %lf %lf", &dot.x, &dot.y, &dot.z) != 3;
+}
 
-    while (read_res == 3 && dot_num < get_dots_num(dots)) {
-        read_res = fscanf(file, "%lf %lf %lf", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].z);
-        dot_num++;
+static int read_points(dots_arr_t &dots, FILE *file) {
+    int read_res = 0;
+
+    unsigned int dots_count = get_dots_num(dots);
+
+    for (unsigned int i = 0; i < dots_count && !read_res; i++) {
+        dot_t& dot = get_dot(dots, i);
+        read_res = read_point(dot, file);
     }
     
-    return (read_res != 3) * BAD_DOTS;
+    return read_res;
 }
 
 int get_dots(dots_arr_t &dots, FILE *file) {
-    auto tmp_dots_arr = init_dots_array();
-    
     auto dots_num = read_dots_num(file);
 
     if (dots_num == -1)
         return BAD_DOTS_NUM;
-    
-    
+
+    dots_arr_t tmp_dots_arr;
+
     if (allocate_dots(tmp_dots_arr, dots_num)) {
         return ALLOC_ERROR;
     }
@@ -44,8 +48,7 @@ int get_dots(dots_arr_t &dots, FILE *file) {
     if (rc)
         destroy_dots(tmp_dots_arr);
     else {
-        dots.dots = tmp_dots_arr.dots;
-        dots.n_dots = tmp_dots_arr.n_dots;
+        dots = tmp_dots_arr;
     }
 
     return rc;

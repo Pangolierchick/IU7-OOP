@@ -7,53 +7,61 @@
 #include "dot_io.hpp"
 #include "logger.h"
 
-int get_model(model_t &model, FILE *file) {
-    auto dots  = init_dots_array();
-    auto edges = init_edges_arr();
+int read_center(dot_t &d, FILE *file) {
+    return fscanf(file, "%lf %lf %lf", &d.x, &d.y, &d.z) != 3;
+}
+
+int read_model(model_t &model, FILE *file) {
+    dots_arr_t  dots  = init_dots_array();
+    edges_arr_t edges = init_edges_arr();
 
     int res = get_dots(dots, file);
 
-    if (res)
-        return res;
-
-    res = get_edges(edges, file);
+    if (!res) 
+        res = get_edges(edges, file);
 
     if (res) {
         destroy_dots(dots);
-        return res;
     }
 
-    model = init_model(&dots, &edges);
+    dot_t center;
 
-    return OK;
+    if (!res) {
+        res = read_center(center, file);
+    }
+
+    if (!res) {
+        model = init_model(&dots, &edges);
+        set_center(model, center);
+    } else {
+        destroy_dots(dots);
+        destroy_edges(edges);
+    }
+
+
+    return res;
 }
 
 int read_from_file(model_t &model, const char *filename) {
-    auto dots = get_dots_arr(model);
-
-    
     FILE *f = fopen(filename, "r");
 
     if (f == NULL) {
         return READ_ERROR;
     }
 
-    int res = 0;
+    model_t temp_model = init_model();
+    int res = read_model(temp_model, f);
 
-    if (dots.dots != nullptr) {
-        model_t temp_model = init_model();
-        res = get_model(temp_model, f);
+    if (res)
+        return res;
 
-        DBG_PRINT("RES: %d\n", res);
-
-        if (!res) {
-            destroy_model(model);
-            model = temp_model;
-        }
+    dots_arr_t dots = get_dots_arr(model);
+    
+    if (!dot_arr_is_empty(dots)) {
+        destroy_model(model);
     }
-    else {
-        res = get_model(model, f);
-    }
+
+    model = temp_model;
 
     fclose(f);
 
@@ -63,12 +71,12 @@ int read_from_file(model_t &model, const char *filename) {
 
 static int dump_dots(const model_t &model, FILE *file) {
     dots_arr_t dot_arr = get_dots_arr((model_t &) model);
-    auto ndots = get_dots_num(dot_arr);
+    unsigned int ndots = get_dots_num(dot_arr);
 
     if (ndots) {
         fprintf(file, "%u\n", ndots);
         for (unsigned int i = 0; i < ndots; i++) {
-            auto dot = get_dot(dot_arr, i);
+            dot_t dot = get_dot(dot_arr, i);
             fprintf(file, "%lf %lf %lf\n", dot.x, dot.y, dot.z);
         }
     }
@@ -80,13 +88,13 @@ static int dump_dots(const model_t &model, FILE *file) {
 
 static int dump_edges(const model_t &model, FILE *file) {
     edges_arr_t edge_arr = get_edges_arr((model_t &) model);
-    auto nedges = get_edges_num(edge_arr);
+    unsigned int nedges = get_edges_num(edge_arr);
 
     if (nedges) {
         fprintf(file, "%u\n", nedges);
 
         for (unsigned int i = 0; i < nedges; i++) {
-            auto edge = get_edge(edge_arr, i);
+            edge_t edge = get_edge(edge_arr, i);
             fprintf(file, "%d %d\n", edge.d1, edge.d2);
         }
     }

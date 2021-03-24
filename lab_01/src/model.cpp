@@ -25,6 +25,8 @@ model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
     model.dots  = dots;
     model.edges = edges;
 
+    model.center = init_dot(0, 0, 0);
+
     return model;
 }
 
@@ -34,6 +36,14 @@ dots_arr_t& get_dots_arr(model_t &model) {
 
 edges_arr_t& get_edges_arr(model_t &model) {
     return model.edges;
+}
+
+void set_center(model_t &model, dot_t c) {
+    model.center = c;
+}
+
+dot_t& get_center(const model_t& model) {
+    return model.center;
 }
 
 void destroy_model(model_t &model) {

@@ -36,3 +36,7 @@ dot_t& get_dot(const dots_arr_t &dots_arr, int ind) {
 unsigned int get_dots_num(const dots_arr_t &dots_arr) {
     return dots_arr.n_dots;
 }
+
+int dot_arr_is_empty(const dots_arr_t &dots) {
+    return dots.dots == nullptr;
+}

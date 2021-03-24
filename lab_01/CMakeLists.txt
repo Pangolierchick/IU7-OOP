@@ -54,9 +54,13 @@ set(PROJECT_SOURCES
         ${INCLUDE_DIR}/model_transform.hpp
         ${SOURCE_DIR}/manager.cpp
         ${INCLUDE_DIR}/manager.hpp
+        ${SOURCE_DIR}/dots_arr_transform.cpp
+        ${INCLUDE_DIR}/dots_arr_transform.hpp
         ${INCLUDE_DIR}/commands.hpp
         ${SOURCE_DIR}/${GRAPHICS_DIR}/draw.cpp
         ${SOURCE_DIR}/${GRAPHICS_DIR}/draw.hpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/qt_wrap.cpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/qt_wrap.hpp
         ${INCLUDE_DIR}/logger.h
 )
 

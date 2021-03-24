@@ -10,6 +10,7 @@ struct event {
 
 struct event_data {
     graphic_view_t field;
+
     move_t move;
     scale_t scale;
     rotate_t rotate;

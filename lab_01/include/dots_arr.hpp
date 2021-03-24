@@ -14,3 +14,4 @@ int allocate_dots(dots_arr_t &dots_arr, const unsigned int dots_num);
 void destroy_dots(dots_arr_t &dots_arr);
 dot_t& get_dot(const dots_arr_t &dots_arr, int ind);
 unsigned int get_dots_num(const dots_arr_t &dots_arr);
+int dot_arr_is_empty(const dots_arr_t &dots);
