@@ -22,7 +22,6 @@ static int read_edge(FILE *file, int *ld, int *rd) {
 }
 
 static int read_edges(FILE *file, edges_arr_t &edges_arr) {
-    
     int rc = 0;
     unsigned int edges_num = get_edges_num(edges_arr);
 

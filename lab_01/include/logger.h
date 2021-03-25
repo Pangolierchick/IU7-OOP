@@ -5,7 +5,7 @@
 
 #define VERSION              "0.2"
 
-#define LOG_LEVEL           4
+#define LOG_LEVEL           0
 
 #define NO_LOG              0
 #define ERROR               1

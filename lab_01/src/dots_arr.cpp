@@ -38,5 +38,5 @@ unsigned int get_dots_num(const dots_arr_t &dots_arr) {
 }
 
 int dot_arr_is_empty(const dots_arr_t &dots) {
-    return dots.dots == nullptr;
+    return dots.dots == nullptr || dots.n_dots == 0;
 }
