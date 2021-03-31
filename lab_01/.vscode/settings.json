@@ -14,7 +14,10 @@
         "system_error": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "__string": "cpp",
+        "memory": "cpp",
+        "type_traits": "cpp"
     }
 
     

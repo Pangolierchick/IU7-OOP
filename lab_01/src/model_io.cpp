@@ -20,7 +20,7 @@ int read_model(model_t &model, FILE *file) {
 
     int res = get_dots(dots, file);
 
-    if (!res) 
+    if (!res)
         res = get_edges(edges, file);
 
     if (res) {
@@ -55,11 +55,13 @@ int read_from_file(model_t &model, const char *filename) {
     model_t temp_model = init_model();
     int res = read_model(temp_model, f);
 
-    if (res)
+    if (res) {
+        fclose(f);
         return res;
+    }
 
     dots_arr_t dots = get_dots_arr(model);
-    
+
     if (!dot_arr_is_empty(dots)) {
         destroy_model(model);
     }

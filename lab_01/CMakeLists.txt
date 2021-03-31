@@ -22,7 +22,7 @@ set(GRAPHICS_DIR graphics)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR}/${GRAPHICS_DIR})
 
-add_definitions(-Wall -Wextra -O2)
+add_definitions(-Wall -Wextra)
 
 set(PROJECT_SOURCES
         ${SOURCE_DIR}/main.cpp

@@ -2,7 +2,7 @@
 
 #include "dot.hpp"
 
-#define PI 3.1415
+#define PI 3.14159265
 
 struct move {
     double x;

@@ -11,7 +11,7 @@ static void x_rotate_dot(dot_t &dot, const double angle) {
 
     double temp_y = dot.y;
 
-    dot.y = dot.y  * cos(radians) + dot.z * sin(radians);
+    dot.y =  dot.y  * cos(radians) + dot.z * sin(radians);
     dot.z = -temp_y * sin(radians) + dot.z * cos(radians);
 }
 
