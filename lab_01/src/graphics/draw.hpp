@@ -1,13 +1,14 @@
 #pragma once
 
-#include <QGraphicsScene>
 #include "model.hpp"
+#include <QGraphicsScene>
 
-#define DRAW_ERROR          120
+#define DRAW_ERROR 120
 
-struct graphic_view {
+struct graphic_view
+{
     QGraphicsScene *scene;
-    
+
     double width;
     double height;
 

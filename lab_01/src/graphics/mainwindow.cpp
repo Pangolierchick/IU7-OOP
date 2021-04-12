@@ -1,13 +1,11 @@
 #include "mainwindow.h"
-#include "manager.hpp"
 #include "./ui_mainwindow.h"
 #include "draw.hpp"
-#include "logger.h"
 #include "error.hpp"
+#include "logger.h"
+#include "manager.hpp"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -27,7 +25,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-int MainWindow::drawModel() {
+int MainWindow::drawModel()
+{
     graphic_view_t field;
     field.scene = ui->graphicsView->scene();
     field.width = field.scene->width();
@@ -43,14 +42,14 @@ int MainWindow::drawModel() {
 
     int res = task_manager(event, event_d);
 
-    if (res) {
+    if (res)
+    {
         error_manager(res);
         ERROR_PRINT("Draw model failed. Error code %d\n", res);
     }
 
     return res;
 }
-
 
 void MainWindow::on_rotateButton_clicked()
 {
@@ -66,11 +65,13 @@ void MainWindow::on_rotateButton_clicked()
     event_d.rotate = rotate;
 
     int res = task_manager(event, event_d);
-    if (res) {
+    if (res)
+    {
         error_manager(res);
         ERROR_PRINT("Rotate failed. Error code %d\n", res);
     }
-    else {
+    else
+    {
         drawModel();
     }
 }
@@ -89,10 +90,12 @@ void MainWindow::on_moveButton_clicked()
     event_d.move = move;
 
     int res = task_manager(event, event_d);
-    if (res) {
+    if (res)
+    {
         ERROR_PRINT("Move failed. Error code %d\n", res);
     }
-    else {
+    else
+    {
         drawModel();
     }
 }
@@ -111,10 +114,12 @@ void MainWindow::on_scaleButton_clicked()
     event_d.scale = scale;
 
     int res = task_manager(event, event_d);
-    if (res) {
+    if (res)
+    {
         ERROR_PRINT("Scale failed. Error code %d\n", res);
     }
-    else {
+    else
+    {
         drawModel();
     }
 }
@@ -125,15 +130,17 @@ void MainWindow::on_loadModelButton_clicked()
     event_data_t event_d;
 
     event.cmd = LOAD_FROM_FILE;
-    event_d.input_filename = ui->loadEdit->toPlainText().toLocal8Bit().data(); //because we are using c api, not c++
+    event_d.input_filename = ui->loadEdit->toPlainText().toLocal8Bit().data(); // because we are using c api, not c++
 
     int res = task_manager(event, event_d);
 
-    if (res) {
+    if (res)
+    {
         error_manager(res);
         ERROR_PRINT("Load failed. Error code %d\n", res);
     }
-    else {
+    else
+    {
         drawModel();
     }
 }
@@ -144,15 +151,17 @@ void MainWindow::on_saveModelButton_clicked()
     event_data_t event_d;
 
     event.cmd = SAVE_TO_FILE;
-    event_d.output_filename = ui->saveEdit->toPlainText().toLocal8Bit().data(); //because we are using c api, not c++
+    event_d.output_filename = ui->saveEdit->toPlainText().toLocal8Bit().data(); // because we are using c api, not c++
 
     int res = task_manager(event, event_d);
 
-    if (res) {
+    if (res)
+    {
         error_manager(res);
         ERROR_PRINT("Save failed. Error code %d\n", res);
     }
-    else {
+    else
+    {
         drawModel();
     }
 }

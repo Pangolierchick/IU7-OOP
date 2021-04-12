@@ -1,14 +1,16 @@
 #pragma once
 
 #include "commands.hpp"
-#include "model_transform.hpp"
 #include "draw.hpp"
+#include "model_transform.hpp"
 
-struct event {
+struct event
+{
     commands_t cmd;
 };
 
-struct event_data {
+struct event_data
+{
     graphic_view_t field;
 
     move_t move;

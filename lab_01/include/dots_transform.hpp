@@ -4,7 +4,8 @@
 
 #define PI 3.14159265
 
-struct move {
+struct move
+{
     double x;
     double y;
     double z;
@@ -12,7 +13,8 @@ struct move {
 
 using move_t = struct move;
 
-struct scale {
+struct scale
+{
     double kx;
     double ky;
     double kz;
@@ -20,7 +22,8 @@ struct scale {
 
 using scale_t = struct scale;
 
-struct rotate {
+struct rotate
+{
     double ax;
     double ay;
     double az;

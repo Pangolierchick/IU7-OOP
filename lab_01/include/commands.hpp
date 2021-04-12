@@ -1,6 +1,7 @@
 #pragma once
 
-enum commands {
+enum commands
+{
     MOVE,
     SCALE,
     ROTATE,
