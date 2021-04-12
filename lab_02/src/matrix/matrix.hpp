@@ -8,7 +8,7 @@
 #include <memory>
 
 template <typename T>
-class Matrix : public baseMatrix {
+class Matrix :  public baseMatrix {
     // TODO friend section
 
     public:
@@ -55,7 +55,7 @@ class Matrix : public baseMatrix {
 //============== DIVISION ==============
 
 	Matrix<T> operator /(const T& value) const;
-	void divide(const T& value) const;
+	void divide(const T& valuxwe) const;
 
 	T& operator ()(size_t i, size_t j);
 	const T& operator ()(size_t i, size_t j) const;
@@ -78,5 +78,5 @@ class Matrix : public baseMatrix {
 
 	private:
 
-	std::shared_ptr<T> data;	
+	std::shared_ptr<T> data = nullptr;
 };
