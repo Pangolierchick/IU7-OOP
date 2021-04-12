@@ -5,14 +5,15 @@
 
 #define DRAW_ERROR 120
 
-struct graphic_view {
-  QGraphicsScene *scene;
+struct graphic_view
+{
+    QGraphicsScene *scene;
 
-  double width;
-  double height;
+    double width;
+    double height;
 
-  double start_x;
-  double start_y;
+    double start_x;
+    double start_y;
 };
 
 using graphic_view_t = struct graphic_view;

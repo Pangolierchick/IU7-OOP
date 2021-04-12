@@ -5,11 +5,12 @@
 #include "edges_arr.hpp"
 #include <cstdio>
 
-struct model {
-  dots_arr_t dots;
-  edges_arr_t edges;
+struct model
+{
+    dots_arr_t dots;
+    edges_arr_t edges;
 
-  dot_t center;
+    dot_t center;
 };
 
 using model_t = struct model;
