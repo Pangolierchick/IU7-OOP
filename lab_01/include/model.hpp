@@ -5,8 +5,7 @@
 #include "edges_arr.hpp"
 #include <cstdio>
 
-struct model
-{
+struct model {
     dots_arr_t dots;
     edges_arr_t edges;
 

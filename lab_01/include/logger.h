@@ -18,8 +18,8 @@
 #define DEBUG_TAG YELLOW "DEBUG" RESET_COLOR
 #define TRACE_TAG MAGENTA "TRACE" RESET_COLOR
 
-#define LOGGER_FORMAT(tag)                                                                                             \
-    "[" tag "]"                                                                                                        \
+#define LOGGER_FORMAT(tag)                                                     \
+    "[" tag "]"                                                                \
     "[%19s] [%17s:%4d] "
 #define LOGGER_ARGS() __FILE__, __func__, __LINE__
 
@@ -46,7 +46,8 @@
 // ==========================================
 
 #if LOG_LEVEL >= DEBUG
-#define DBG_PRINT(msg, ...) fprintf(stderr, LOGGER_FORMAT(DEBUG_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
+#define DBG_PRINT(msg, ...)                                                    \
+    fprintf(stderr, LOGGER_FORMAT(DEBUG_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
 #define DBG_PRINTF(format, ...) fprintf(stderr, format, __VA_ARGS__);
 #else
 #define DBG_PUTS(msg)
@@ -56,7 +57,8 @@
 #endif
 
 #if LOG_LEVEL >= INFO
-#define INFO_PRINT(msg, ...) fprintf(stderr, LOGGER_FORMAT(INFO_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
+#define INFO_PRINT(msg, ...)                                                   \
+    fprintf(stderr, LOGGER_FORMAT(INFO_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
 #define INFO_PRINTF(format, ...) fprintf(stderr, format, __VA_ARGS__);
 #else
 #define INFO_PRINT(...)
@@ -64,7 +66,8 @@
 #endif
 
 #if LOG_LEVEL >= ERROR
-#define ERROR_PRINT(msg, ...) fprintf(stderr, LOGGER_FORMAT(ERROR_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
+#define ERROR_PRINT(msg, ...)                                                  \
+    fprintf(stderr, LOGGER_FORMAT(ERROR_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
 #define ERROR_PRINTF(format, ...) fprintf(stderr, format, __VA_ARGS__);
 #else
 #define ERROR_PRINT(...)
@@ -72,7 +75,8 @@
 #endif
 
 #if LOG_LEVEL >= TRACE
-#define TRACE_PRINT(msg, ...) fprintf(stderr, LOGGER_FORMAT(TRACE_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
+#define TRACE_PRINT(msg, ...)                                                  \
+    fprintf(stderr, LOGGER_FORMAT(TRACE_TAG) msg, LOGGER_ARGS(), ##__VA_ARGS__)
 #define TRACE_PRINTF(format, ...) fprintf(stderr, format, __VA_ARGS__);
 #else
 #define TRACE_PRINT(...)

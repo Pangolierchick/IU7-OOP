@@ -2,8 +2,7 @@
 
 #include "edge.hpp"
 
-struct edges_arr
-{
+struct edges_arr {
     edge_t *edges;
     unsigned int edges_num;
 };

@@ -1,7 +1,6 @@
 #pragma once
 
-typedef struct dot
-{
+typedef struct dot {
     double x;
     double y;
     double z;

@@ -2,8 +2,7 @@
 
 #include "dot.hpp"
 
-struct edge
-{
+struct edge {
     int d1;
     int d2;
 };
