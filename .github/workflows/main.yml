@@ -15,7 +15,7 @@ jobs:
         extensions: 'h,cpp,c,hpp'
         clangFormatVersion: 11
         inplace: True
-        style: Visual Studio
+        style: llvm
     - uses: EndBug/add-and-commit@v4
       with:
         author_name: Clang Robot
