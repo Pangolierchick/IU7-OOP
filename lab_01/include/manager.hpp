@@ -1,21 +1,21 @@
 #pragma once
 
 #include "commands.hpp"
-#include "model_transform.hpp"
 #include "draw.hpp"
+#include "model_transform.hpp"
 
 struct event {
-    commands_t cmd;
+  commands_t cmd;
 };
 
 struct event_data {
-    graphic_view_t field;
+  graphic_view_t field;
 
-    move_t move;
-    scale_t scale;
-    rotate_t rotate;
-    char *output_filename;
-    char *input_filename;
+  move_t move;
+  scale_t scale;
+  rotate_t rotate;
+  char *output_filename;
+  char *input_filename;
 };
 
 using event_t = struct event;
