@@ -20,5 +20,6 @@ jobs:
         author_name: Clang Robot
         author_email: robot@example.com
         message: 'Committing clang-format changes'
+        style: Visual Studio
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
