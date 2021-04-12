@@ -1,6 +1,8 @@
 #pragma once
 
 #include "base_matrix.hpp"
+#include "iterator.hpp"
+#include "const_iterator.hpp"
 
 #include <initializer_list>
 #include <memory>
@@ -65,8 +67,8 @@ class Matrix : public baseMatrix {
 	Iterator<T> begin();
 	Iterator<T> end();
 
-	IteratorConst<T> begin() const;
-	IteratorConst<T> end() const;
+	constIterator<T> begin() const;
+	constIterator<T> end() const;
 
 	const T& get_value(size_t i, size_t j) const;
 	void set_value(size_t i, size_t j, const T& value);
