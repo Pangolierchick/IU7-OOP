@@ -1,7 +1,7 @@
 #include <cstdio>
 
-#include "matrix.hpp"
 #include "iterator.hpp"
+#include "matrix.hpp"
 #include "matrix_implementation.hpp"
 
 int main() {
