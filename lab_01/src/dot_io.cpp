@@ -4,7 +4,7 @@
 #include "logger.h"
 #include <cstdio>
 
-static int read_dots_num(FILE *file) {
+static int read_dots_num(FILE* file) {
     int ndots;
     int rc = fscanf(file, "%d", &ndots);
 
@@ -14,24 +14,24 @@ static int read_dots_num(FILE *file) {
     return ndots;
 }
 
-static int read_point(dot_t &dot, FILE *file) {
+static int read_point(dot_t& dot, FILE* file) {
     return fscanf(file, "%lf %lf %lf", &dot.x, &dot.y, &dot.z) != 3;
 }
 
-static int read_points(dots_arr_t &dots, FILE *file) {
+static int read_points(dots_arr_t& dots, FILE* file) {
     int read_res = 0;
 
     unsigned int dots_count = get_dots_num(dots);
 
     for (unsigned int i = 0; i < dots_count && !read_res; i++) {
-        dot_t &dot = get_dot(dots, i);
+        dot_t& dot = get_dot(dots, i);
         read_res = read_point(dot, file);
     }
 
     return read_res;
 }
 
-int get_dots(dots_arr_t &dots, FILE *file) {
+int get_dots(dots_arr_t& dots, FILE* file) {
     auto dots_num = read_dots_num(file);
 
     if (dots_num == -1)

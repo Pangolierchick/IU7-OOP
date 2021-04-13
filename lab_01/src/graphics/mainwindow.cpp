@@ -5,11 +5,11 @@
 #include "logger.h"
 #include "manager.hpp"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    QGraphicsScene *scene = new QGraphicsScene(0, 0, WIN_X, WIN_Y, this);
+    QGraphicsScene* scene = new QGraphicsScene(0, 0, WIN_X, WIN_Y, this);
     ui->graphicsView->setScene(scene);
 }
 

@@ -3,7 +3,7 @@
 #include "model.hpp"
 #include "qt_wrap.hpp"
 
-int draw_model(model_t &model, graphic_view_t &field) {
+int draw_model(model_t& model, graphic_view_t& field) {
     dots_arr_t dots = get_dots_arr(model);
     edges_arr_t edges = get_edges_arr(model);
 

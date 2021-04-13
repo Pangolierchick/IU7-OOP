@@ -5,7 +5,7 @@
 #include "error.hpp"
 #include "model.hpp"
 
-model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
+model_t init_model(dots_arr_t* da, edges_arr_t* ea) {
     model_t model;
 
     dots_arr_t dots = {nullptr, 0};
@@ -30,15 +30,15 @@ model_t init_model(dots_arr_t *da, edges_arr_t *ea) {
     return model;
 }
 
-dots_arr_t &get_dots_arr(model_t &model) { return model.dots; }
+dots_arr_t& get_dots_arr(model_t& model) { return model.dots; }
 
-edges_arr_t &get_edges_arr(model_t &model) { return model.edges; }
+edges_arr_t& get_edges_arr(model_t& model) { return model.edges; }
 
-void set_center(model_t &model, dot_t c) { model.center = c; }
+void set_center(model_t& model, dot_t c) { model.center = c; }
 
-dot_t &get_center(model_t &model) { return model.center; }
+dot_t& get_center(model_t& model) { return model.center; }
 
-void destroy_model(model_t &model) {
+void destroy_model(model_t& model) {
     destroy_dots(model.dots);
     destroy_edges(model.edges);
 }

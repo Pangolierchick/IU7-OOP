@@ -7,7 +7,7 @@
 #include "logger.h"
 #include <cstdio>
 
-static int read_edges_num(FILE *file) {
+static int read_edges_num(FILE* file) {
     int nedges;
     int rc = fscanf(file, "%d", &nedges);
 
@@ -17,11 +17,11 @@ static int read_edges_num(FILE *file) {
     return nedges;
 }
 
-static int read_edge(FILE *file, int *ld, int *rd) {
+static int read_edge(FILE* file, int* ld, int* rd) {
     return fscanf(file, "%d %d", ld, rd) != 2;
 }
 
-static int read_edges(FILE *file, edges_arr_t &edges_arr) {
+static int read_edges(FILE* file, edges_arr_t& edges_arr) {
     int rc = 0;
     unsigned int edges_num = get_edges_num(edges_arr);
 
@@ -36,7 +36,7 @@ static int read_edges(FILE *file, edges_arr_t &edges_arr) {
     return rc;
 }
 
-int get_edges(edges_arr_t &edges_arr, FILE *file) {
+int get_edges(edges_arr_t& edges_arr, FILE* file) {
     int edge_num = read_edges_num(file);
 
     if (edge_num < 0) {

@@ -12,7 +12,7 @@ class basicMatrixException : public std::exception {
                     "\nTime: " + ctime(&time) + "Info: " + error_name + "\n";
     }
 
-    virtual const char *what(void) const noexcept override {
+    virtual const char* what(void) const noexcept override {
         return this->error_msg.c_str();
     }
 
@@ -26,7 +26,7 @@ class indexException : public basicMatrixException {
                    time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
 
-    const char *what(void) const noexcept { return this->error_msg.c_str(); }
+    const char* what(void) const noexcept { return this->error_msg.c_str(); }
 };
 
 class NullPtrException : public basicMatrixException {
@@ -35,7 +35,7 @@ class NullPtrException : public basicMatrixException {
                      time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
 
-    const char *what(void) const noexcept { return this->error_msg.c_str(); }
+    const char* what(void) const noexcept { return this->error_msg.c_str(); }
 };
 
 class MultMatrixException : public basicMatrixException {
@@ -44,5 +44,5 @@ class MultMatrixException : public basicMatrixException {
                         time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
 
-    const char *what(void) const noexcept { return this->error_msg.c_str(); }
+    const char* what(void) const noexcept { return this->error_msg.c_str(); }
 };

@@ -3,7 +3,7 @@
 #include "model.hpp"
 #include "model_io.hpp"
 
-int task_manager(const event_t &event, event_data_t &data) {
+int task_manager(const event_t& event, event_data_t& data) {
     int res = 0;
 
     static model_t model = init_model();

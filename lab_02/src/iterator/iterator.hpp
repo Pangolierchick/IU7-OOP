@@ -6,21 +6,22 @@
 
 #include "matrix_exceptions.hpp"
 
-template <typename T> class Matrix;
+template <typename T>
+class Matrix;
 
 template <typename T>
 class Iterator : public std::iterator<std::input_iterator_tag, T> {
   public:
-    Iterator(const Matrix<T> &matrix, const size_t index = 0)
+    Iterator(const Matrix<T>& matrix, const size_t index = 0)
         : __data(matrix.data), __index(index), __rows(matrix.Row()),
           __clms(matrix.Column()) {}
 
-    Iterator(const Iterator &iter) = default;
+    Iterator(const Iterator& iter) = default;
 
-    bool operator!=(Iterator const &i) const { return __index != i.__index; }
-    bool operator==(Iterator const &i) const { return __index == i.__index; }
+    bool operator!=(Iterator const& i) const { return __index != i.__index; }
+    bool operator==(Iterator const& i) const { return __index == i.__index; }
 
-    Iterator<T> &operator=(const Iterator<T> &iter) {
+    Iterator<T>& operator=(const Iterator<T>& iter) {
         __data = iter.__data;
         __index = iter.__index;
         __rows = iter.__rows;
@@ -29,21 +30,21 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return *this;
     }
 
-    Iterator<T> &operator++() {
+    Iterator<T>& operator++() {
         if (__index < __rows * __clms)
             __index++;
 
         return *this;
     }
 
-    Iterator<T> &operator++(int) {
+    Iterator<T>& operator++(int) {
         Iterator<T> iter(*this);
 
         ++(*this);
         return iter;
     }
 
-    Iterator<T> &operator+(size_t val) const {
+    Iterator<T>& operator+(size_t val) const {
         Iterator<T> iter(*this);
 
         iter.__index += val;
@@ -54,7 +55,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    Iterator<T> &operator+=(size_t val) {
+    Iterator<T>& operator+=(size_t val) {
         __index += val;
 
         if (__index > __rows * __clms)
@@ -63,14 +64,14 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    Iterator<T> &operator--() {
+    Iterator<T>& operator--() {
         if (__index > 0 && __index < __rows * __clms)
             __index--;
 
         return *this;
     }
 
-    Iterator<T> &operator--(int) {
+    Iterator<T>& operator--(int) {
         Iterator<T> iter(*this);
 
         --(*this);
@@ -78,7 +79,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    Iterator<T> &operator-(size_t val) const {
+    Iterator<T>& operator-(size_t val) const {
         Iterator<T> iter(*this);
 
         if (iter.__index < val)
@@ -89,7 +90,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    Iterator<T> &operator-=(size_t val) {
+    Iterator<T>& operator-=(size_t val) {
         if (__index < val)
             __index = 0;
         else
@@ -98,7 +99,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    Iterator<T> &operator*() const {
+    Iterator<T>& operator*() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -116,7 +117,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return *(sh_ptr.get() + __index);
     }
 
-    Iterator<T> &operator->() const {
+    Iterator<T>& operator->() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -138,7 +139,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
     bool is_end() const { return __index >= __rows * __clms; }
     bool is_valid() const { return !__data.expired(); }
 
-    Iterator<T> &next() { this->operator++(); }
+    Iterator<T>& next() { this->operator++(); }
 
   private:
     std::weak_ptr<T> __data = nullptr;

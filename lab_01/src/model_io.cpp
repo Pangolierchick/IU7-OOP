@@ -6,14 +6,14 @@
 #include "model.hpp"
 #include <cstdio>
 
-int read_center(dot_t &d, FILE *file) {
+int read_center(dot_t& d, FILE* file) {
     if (fscanf(file, "%lf %lf %lf", &d.x, &d.y, &d.z) != 3)
         return BAD_CENTER;
 
     return OK;
 }
 
-int read_model(model_t &model, FILE *file) {
+int read_model(model_t& model, FILE* file) {
     dots_arr_t dots = init_dots_array();
     edges_arr_t edges = init_edges_arr();
 
@@ -43,8 +43,8 @@ int read_model(model_t &model, FILE *file) {
     return res;
 }
 
-int read_from_file(model_t &model, const char *filename) {
-    FILE *f = fopen(filename, "r");
+int read_from_file(model_t& model, const char* filename) {
+    FILE* f = fopen(filename, "r");
 
     if (f == NULL) {
         return READ_ERROR;
@@ -71,8 +71,8 @@ int read_from_file(model_t &model, const char *filename) {
     return res;
 }
 
-static int dump_dots(const model_t &model, FILE *file) {
-    dots_arr_t dot_arr = get_dots_arr((model_t &)model);
+static int dump_dots(const model_t& model, FILE* file) {
+    dots_arr_t dot_arr = get_dots_arr((model_t&)model);
     unsigned int ndots = get_dots_num(dot_arr);
 
     if (ndots) {
@@ -88,8 +88,8 @@ static int dump_dots(const model_t &model, FILE *file) {
     return OK;
 }
 
-static int dump_edges(const model_t &model, FILE *file) {
-    edges_arr_t edge_arr = get_edges_arr((model_t &)model);
+static int dump_edges(const model_t& model, FILE* file) {
+    edges_arr_t edge_arr = get_edges_arr((model_t&)model);
     unsigned int nedges = get_edges_num(edge_arr);
 
     if (nedges) {
@@ -106,7 +106,7 @@ static int dump_edges(const model_t &model, FILE *file) {
     return OK;
 }
 
-static int dump_center(const model_t &model, FILE *file) {
+static int dump_center(const model_t& model, FILE* file) {
     dot_t center = model.center;
 
     fprintf(file, "%lf %lf %lf\n", center.x, center.y, center.z);
@@ -114,8 +114,8 @@ static int dump_center(const model_t &model, FILE *file) {
     return OK;
 }
 
-int save_to_file(const model_t &model, const char *filename) {
-    FILE *f = fopen(filename, "w");
+int save_to_file(const model_t& model, const char* filename) {
+    FILE* f = fopen(filename, "w");
 
     if (f == NULL) {
         return WRITE_ERROR;

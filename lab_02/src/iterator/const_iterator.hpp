@@ -10,20 +10,20 @@
 template <typename T>
 class constIterator : public std::iterator<std::input_iterator_tag, T> {
   public:
-    constIterator(const Matrix<T> &matrix, const size_t index = 0)
+    constIterator(const Matrix<T>& matrix, const size_t index = 0)
         : __data(matrix.data), __index(index), __rows(matrix.Row()),
           __clms(matrix.Column()) {}
 
-    constIterator(const constIterator &iter) = default;
+    constIterator(const constIterator& iter) = default;
 
-    bool operator!=(constIterator const &i) const {
+    bool operator!=(constIterator const& i) const {
         return __index != i.__index;
     }
-    bool operator==(constIterator const &i) const {
+    bool operator==(constIterator const& i) const {
         return __index == i.__index;
     }
 
-    constIterator<T> &operator=(const constIterator<T> &iter) {
+    constIterator<T>& operator=(const constIterator<T>& iter) {
         __data = iter.__data;
         __index = iter.__index;
         __rows = iter.__rows;
@@ -32,21 +32,21 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return *this;
     }
 
-    constIterator<T> &operator++() {
+    constIterator<T>& operator++() {
         if (__index < __rows * __clms)
             __index++;
 
         return *this;
     }
 
-    constIterator<T> &operator++(int) {
+    constIterator<T>& operator++(int) {
         constIterator<T> iter(*this);
 
         ++(*this);
         return iter;
     }
 
-    constIterator<T> &operator+(size_t val) const {
+    constIterator<T>& operator+(size_t val) const {
         constIterator<T> iter(*this);
 
         iter.__index += val;
@@ -57,7 +57,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    constIterator<T> &operator+=(size_t val) {
+    constIterator<T>& operator+=(size_t val) {
         __index += val;
 
         if (__index > __rows * __clms)
@@ -66,14 +66,14 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    constIterator<T> &operator--() {
+    constIterator<T>& operator--() {
         if (__index > 0 && __index < __rows * __clms)
             __index--;
 
         return *this;
     }
 
-    constIterator<T> &operator--(int) {
+    constIterator<T>& operator--(int) {
         constIterator<T> iter(*this);
 
         --(*this);
@@ -81,7 +81,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    constIterator<T> &operator-(size_t val) const {
+    constIterator<T>& operator-(size_t val) const {
         constIterator<T> iter(*this);
 
         if (iter.__index < val)
@@ -92,7 +92,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return iter;
     }
 
-    constIterator<T> &operator-=(size_t val) {
+    constIterator<T>& operator-=(size_t val) {
         if (__index < val)
             __index = 0;
         else
@@ -101,7 +101,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    const constIterator<T> &operator*() const {
+    const constIterator<T>& operator*() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -119,7 +119,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return *(sh_ptr.get() + __index);
     }
 
-    const constIterator<T> &operator->() const {
+    const constIterator<T>& operator->() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -141,7 +141,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
     bool is_end() const { return __index >= __rows * __clms; }
     bool is_valid() const { return !__data.expired(); }
 
-    constIterator<T> &next() { this->operator++(); }
+    constIterator<T>& next() { this->operator++(); }
 
   private:
     std::weak_ptr<T> __data = nullptr;

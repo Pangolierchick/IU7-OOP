@@ -6,7 +6,7 @@
 #define DRAW_ERROR 120
 
 struct graphic_view {
-    QGraphicsScene *scene;
+    QGraphicsScene* scene;
 
     double width;
     double height;
@@ -17,5 +17,5 @@ struct graphic_view {
 
 using graphic_view_t = struct graphic_view;
 
-void draw_line(graphic_view_t &field, dot_t d1, dot_t d2);
-int draw_model(model_t &model, graphic_view_t &field);
+void draw_line(graphic_view_t& field, dot_t d1, dot_t d2);
+int draw_model(model_t& model, graphic_view_t& field);
