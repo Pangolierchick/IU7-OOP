@@ -296,7 +296,7 @@ Matrix<T> Matrix<T>::operator*(const T& value) const {
     for (size_t i = 0; i < m.rows; i++)
         for (size_t j = 0; j < m.columns; j++)
             dst_ptr[i * rows + j] *= value;
-    
+
     return m;
 }
 
@@ -334,7 +334,7 @@ Matrix<T> Matrix<T>::operator/(const T& value) const {
     for (size_t i = 0; i < m.rows; i++)
         for (size_t j = 0; j < m.columns; j++)
             dst_ptr[i * m.rows + j] /= value;
-    
+
     return m;
 }
 
@@ -345,7 +345,7 @@ Matrix<T> Matrix<T>::operator/=(const T& value) const {
     for (size_t i = 0; i < rows; i++)
         for (size_t j = 0; j < columns; j++)
             dst_ptr[i * rows + j] /= value;
-    
+
     return (*this);
 }
 
@@ -358,7 +358,7 @@ void Matrix<T>::divide(const T& value) const {
     for (size_t i = 0; i < m.rows; i++)
         for (size_t j = 0; j < m.columns; j++)
             dst_ptr[i * m.rows + j] *= value;
-    
+
     return m;
 }
 
@@ -369,7 +369,7 @@ void Matrix<T>::mult(const T& value) const {
     auto dst_ptr = m.data.get();
 
     __mul(value);
-    
+
     return m;
 }
 
@@ -377,7 +377,7 @@ template <typename T>
 T& Matrix<T>::operator()(size_t i, size_t j) {
     if (i >= rows || j >= columns) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-            "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return data.get()[i * rows + j];
@@ -387,7 +387,7 @@ template <typename T>
 const T& Matrix<T>::operator()(size_t i, size_t j) const {
     if (i >= rows || j >= columns) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-            "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return data.get()[i * rows + j];
@@ -399,7 +399,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix<_T>& mtrx) {
     for (size_t i = 0; i < mtrx.rows; i++) {
         for (size_t j = 0; j < mtrx.columns; j++)
             os << ptr[i * mtrx.rows + j] << "\t";
-        
+
         os << std::endl;
     }
 
@@ -427,7 +427,6 @@ constIterator<T> Matrix<T>::begin() const {
     return iter;
 }
 
-
 template <typename T>
 constIterator<T> Matrix<T>::end() const {
     constIterator<T> iter((*this), rows * columns);
@@ -439,7 +438,7 @@ template <typename T>
 const T& Matrix<T>::at(size_t i, size_t j) const {
     if (i > rows || j > columns) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-            "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return data.get()[i * rows + j];
@@ -449,7 +448,7 @@ template <typename T>
 T& Matrix<T>::at(size_t i, size_t j) {
     if (i > rows || j > columns) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-            "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return data.get()[i * rows + j];
@@ -459,7 +458,7 @@ template <typename T>
 void Matrix<T>::set_at(size_t i, size_t j, const T& value) {
     if (i > rows || j > columns) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-            "Index out of bounds");
+                             "Index out of bounds");
     }
 
     data.get()[i * rows + j] = value;

@@ -80,7 +80,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         std::shared_ptr<T> sh_ptr = __data.lock();
 
         auto ptr = sh_ptr.get();
-    
+
         return ptr[__index];
     }
 

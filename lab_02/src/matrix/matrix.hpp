@@ -3,7 +3,6 @@
 #include "base_matrix.hpp"
 #include "const_iterator.hpp"
 #include "iterator.hpp"
-#include "const_iterator.hpp"
 
 #include <initializer_list>
 #include <memory>
@@ -11,7 +10,8 @@
 template <typename T>
 class Matrix : public baseMatrix {
     friend Iterator<T>;
-	friend constIterator<T>;
+    friend constIterator<T>;
+
   public:
     //================ CONSTRUCTORS ================
     Matrix();
