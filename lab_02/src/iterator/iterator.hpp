@@ -13,8 +13,8 @@ template <typename T>
 class Iterator : public std::iterator<std::input_iterator_tag, T> {
   public:
     Iterator(const Matrix<T>& matrix, const size_t index = 0)
-        : __data(matrix.data), __index(index), __rows(matrix.Row()),
-          __clms(matrix.Column()) {}
+        : __data(matrix.data), __index(index), __rows(matrix.rows),
+          __clms(matrix.columns) {}
 
     Iterator(const Iterator& iter) = default;
 
@@ -37,7 +37,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return *this;
     }
 
-    Iterator<T>& operator++(int) {
+    Iterator<T> operator++(int) {
         Iterator<T> iter(*this);
 
         ++(*this);
@@ -64,42 +64,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    Iterator<T>& operator--() {
-        if (__index > 0 && __index < __rows * __clms)
-            __index--;
-
-        return *this;
-    }
-
-    Iterator<T>& operator--(int) {
-        Iterator<T> iter(*this);
-
-        --(*this);
-
-        return iter;
-    }
-
-    Iterator<T>& operator-(size_t val) const {
-        Iterator<T> iter(*this);
-
-        if (iter.__index < val)
-            iter.__index = 0;
-        else
-            iter.__index -= val;
-
-        return iter;
-    }
-
-    Iterator<T>& operator-=(size_t val) {
-        if (__index < val)
-            __index = 0;
-        else
-            __index -= val;
-
-        return (*this);
-    }
-
-    Iterator<T>& operator*() const {
+    T operator*() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -107,17 +72,19 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
                                    curr_time, "Data pointer is null.");
         }
 
-        if (__index >= __rows * __clms) {
+        if (__index > __rows * __clms) {
             throw indexException(__FILE__, typeid(*this).name(), __LINE__,
                                  curr_time, "Iterator out of bounds.");
         }
 
         std::shared_ptr<T> sh_ptr = __data.lock();
 
-        return *(sh_ptr.get() + __index);
+        auto ptr = sh_ptr.get();
+    
+        return ptr[__index];
     }
 
-    Iterator<T>& operator->() const {
+    T& operator->() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {

@@ -11,8 +11,8 @@ template <typename T>
 class constIterator : public std::iterator<std::input_iterator_tag, T> {
   public:
     constIterator(const Matrix<T>& matrix, const size_t index = 0)
-        : __data(matrix.data), __index(index), __rows(matrix.Row()),
-          __clms(matrix.Column()) {}
+        : __data(matrix.data), __index(index), __rows(matrix.rows),
+          __clms(matrix.columns) {}
 
     constIterator(const constIterator& iter) = default;
 
@@ -39,7 +39,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return *this;
     }
 
-    constIterator<T>& operator++(int) {
+    constIterator<T> operator++(int) {
         constIterator<T> iter(*this);
 
         ++(*this);
@@ -66,42 +66,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    constIterator<T>& operator--() {
-        if (__index > 0 && __index < __rows * __clms)
-            __index--;
-
-        return *this;
-    }
-
-    constIterator<T>& operator--(int) {
-        constIterator<T> iter(*this);
-
-        --(*this);
-
-        return iter;
-    }
-
-    constIterator<T>& operator-(size_t val) const {
-        constIterator<T> iter(*this);
-
-        if (iter.__index < val)
-            iter.__index = 0;
-        else
-            iter.__index -= val;
-
-        return iter;
-    }
-
-    constIterator<T>& operator-=(size_t val) {
-        if (__index < val)
-            __index = 0;
-        else
-            __index -= val;
-
-        return (*this);
-    }
-
-    const constIterator<T>& operator*() const {
+    const T operator*() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
@@ -116,10 +81,10 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
 
         std::shared_ptr<T> sh_ptr = __data.lock();
 
-        return *(sh_ptr.get() + __index);
+        return sh_ptr.get()[__index];
     }
 
-    const constIterator<T>& operator->() const {
+    const T operator->() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {

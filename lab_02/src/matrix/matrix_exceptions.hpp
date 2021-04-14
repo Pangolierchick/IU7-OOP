@@ -7,7 +7,7 @@ class basicMatrixException : public std::exception {
   public:
     basicMatrixException(std::string file, std::string className, int line,
                          time_t time, std::string error_name) {
-        error_msg = "File name: " + file + +"in class: " + className +
+        error_msg = " File name: " + file + " in class: " + className +
                     " in line " + std::to_string(line) +
                     "\nTime: " + ctime(&time) + "Info: " + error_name + "\n";
     }

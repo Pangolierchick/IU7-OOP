@@ -3,14 +3,15 @@
 #include "base_matrix.hpp"
 #include "const_iterator.hpp"
 #include "iterator.hpp"
+#include "const_iterator.hpp"
 
 #include <initializer_list>
 #include <memory>
 
 template <typename T>
 class Matrix : public baseMatrix {
-    // TODO friend section
-
+    friend Iterator<T>;
+	friend constIterator<T>;
   public:
     //================ CONSTRUCTORS ================
     Matrix();
@@ -34,6 +35,7 @@ class Matrix : public baseMatrix {
     Matrix<T> operator+(const Matrix<T>& mtrx) const;
     Matrix<T> operator+(const T& value) const;
     Matrix<T>& operator+=(const Matrix<T>& mtrx);
+    Matrix<T>& operator+=(const T& value);
     void add(const Matrix<T>& mtrx) const;
     void add(const T& value) const;
 
@@ -41,6 +43,7 @@ class Matrix : public baseMatrix {
     Matrix<T> operator-(const Matrix<T>& mtrx) const;
     Matrix<T> operator-(const T& value) const;
     Matrix<T>& operator-=(const Matrix<T>& mtrx);
+    Matrix<T>& operator-=(const T& value);
     void sub(const Matrix<T>& mtrx) const;
     void sub(const T& value) const;
 
@@ -53,7 +56,8 @@ class Matrix : public baseMatrix {
     //============== DIVISION ==============
 
     Matrix<T> operator/(const T& value) const;
-    void divide(const T& valuxwe) const;
+    Matrix<T> operator/=(const T& value) const;
+    void divide(const T& value) const;
 
     T& operator()(size_t i, size_t j);
     const T& operator()(size_t i, size_t j) const;
@@ -69,6 +73,7 @@ class Matrix : public baseMatrix {
     constIterator<T> end() const;
 
     const T& at(size_t i, size_t j) const;
+    T& at(size_t i, size_t j);
     void set_at(size_t i, size_t j, const T& value);
 
     void fill_zero();

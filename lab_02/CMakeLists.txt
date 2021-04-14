@@ -29,4 +29,6 @@ set(PROJECT_SOURCES
     ${ITERATOR_DIR}/const_iterator.hpp
 )
 
+set_property(SOURCE ${PROJECT_SOURCES} PROPERTY CXX_STANDARD 11)
+
 add_executable(lab_02.out ${PROJECT_SOURCES})
