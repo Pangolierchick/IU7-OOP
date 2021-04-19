@@ -20,4 +20,4 @@ class baseMatrix {
     size_t elem_num;
 };
 
-baseMatrix::~baseMatrix () {}
+baseMatrix::~baseMatrix() {}
