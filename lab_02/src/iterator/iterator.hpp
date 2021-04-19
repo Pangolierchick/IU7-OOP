@@ -5,6 +5,7 @@
 #include <string>
 
 #include "matrix_exceptions.hpp"
+#include "iterator_exception.hpp"
 
 template <typename T>
 class Matrix;
@@ -64,11 +65,11 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return (*this);
     }
 
-    T operator*() const {
+    const T& operator*() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
-            throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+            throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
                                    curr_time, "Data pointer is null.");
         }
 
@@ -84,11 +85,11 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
         return ptr[__index];
     }
 
-    T& operator->() const {
+    const T* operator->() const {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
-            throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+            throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
                                    curr_time, "Data pointer is null.");
         }
 

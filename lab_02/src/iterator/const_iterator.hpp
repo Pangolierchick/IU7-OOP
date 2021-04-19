@@ -6,6 +6,7 @@
 
 #include "matrix.hpp"
 #include "matrix_exceptions.hpp"
+#include "iterator_exception.hpp"
 
 template <typename T>
 class constIterator : public std::iterator<std::input_iterator_tag, T> {
@@ -70,7 +71,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
-            throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+            throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
                                    curr_time, "Data pointer is null.");
         }
 
@@ -88,7 +89,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
         time_t curr_time = time(nullptr);
 
         if (__data.expired()) {
-            throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+            throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
                                    curr_time, "Data pointer is null.");
         }
 
