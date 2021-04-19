@@ -8,7 +8,7 @@
 #include <memory>
 
 template <typename T>
-class Matrix : public baseMatrix {
+class Matrix : virtual public baseMatrix {
     friend Iterator<T>;
     friend constIterator<T>;
 
@@ -36,31 +36,39 @@ class Matrix : public baseMatrix {
     Matrix<T> operator+(const T& value) const;
     Matrix<T>& operator+=(const Matrix<T>& mtrx);
     Matrix<T>& operator+=(const T& value);
-    void add(const Matrix<T>& mtrx) const;
-    void add(const T& value) const;
+    Matrix<T>& add(const Matrix<T>& mtrx);
+    Matrix<T>& add(const T& value);
 
     //================ SUBSTRACTION ===============
     Matrix<T> operator-(const Matrix<T>& mtrx) const;
     Matrix<T> operator-(const T& value) const;
     Matrix<T>& operator-=(const Matrix<T>& mtrx);
     Matrix<T>& operator-=(const T& value);
-    void sub(const Matrix<T>& mtrx) const;
-    void sub(const T& value) const;
+    Matrix<T>& sub(const Matrix<T>& mtrx);
+    Matrix<T>& sub(const T& value);
 
     //============== MULTIPLICATION ==============
     Matrix<T> operator*(const Matrix<T>& mtrx) const;
     Matrix<T> operator*(const T& value) const;
     Matrix<T>& operator*=(const Matrix<T>& mtrx);
-    void mult(const T& value) const;
+    Matrix<T>& operator*=(const T& value);
+    Matrix<T>& mult(const T& value) const;
 
     //============== DIVISION ==============
 
     Matrix<T> operator/(const T& value) const;
-    Matrix<T> operator/=(const T& value) const;
-    void divide(const T& value) const;
+    Matrix<T> operator/(const Matrix<T>& m) const;
+    Matrix<T>& operator/=(const T& value);
+    Matrix<T>& operator/=(const Matrix<T>& m);
+    Matrix<T>& divide(const T& value);
+    Matrix<T>& divide(const Matrix<T>& m);
 
     T& operator()(size_t i, size_t j);
     const T& operator()(size_t i, size_t j) const;
+
+    const T& at(size_t i, size_t j) const;
+    T& at(size_t i, size_t j);
+    void set_at(size_t i, size_t j, const T& value);
 
     template <typename _T>
     friend std::ostream& operator<<(std::ostream& os, const Matrix<_T>& mtrx);
@@ -72,12 +80,18 @@ class Matrix : public baseMatrix {
     constIterator<T> begin() const;
     constIterator<T> end() const;
 
-    const T& at(size_t i, size_t j) const;
-    T& at(size_t i, size_t j);
-    void set_at(size_t i, size_t j, const T& value);
+    constIterator<T> cbegin() const;
+    constIterator<T> cend() const;
 
-    void fill_zero();
-    void identity_matrix();
+    static Matrix<T> fill_zero(size_t r, size_t c);
+    static Matrix<T> identity_matrix(size_t r, size_t c);
+
+    void swap_rows(size_t i, size_t j);
+    Matrix<T> inverted();
+    T det();
+    Matrix<T> transpose() const;
+
+    Matrix<T> triangle() const;
 
   private:
     std::shared_ptr<T> data = nullptr;
@@ -90,4 +104,6 @@ class Matrix : public baseMatrix {
 
     void __mul(const T& v);
     void __div(const T& v);
+
+    size_t __rref();
 };

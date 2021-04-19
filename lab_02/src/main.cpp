@@ -10,9 +10,7 @@
 #define RESET_COLOR "\u001b[0m"
 
 int main() {
-
     try {
-
         printf(YELLOW_COLOR "Testing constructors" RESET_COLOR "\n");
 
         Matrix<int> test1(3, 3);
@@ -29,11 +27,9 @@ int main() {
 
         printf(YELLOW_COLOR "Testing operators" RESET_COLOR "\n");
 
-        Matrix<int> m1(3, 3);
-        m1.identity_matrix();
+        Matrix<int> m1 = Matrix<int>::identity_matrix(3, 3);
 
-        Matrix<int> m2(3, 3);
-        m2.identity_matrix();
+        Matrix<int> m2 = Matrix<int>::identity_matrix(3, 3);
 
         Matrix<int> m_res = m1 + m2;
 
@@ -101,6 +97,18 @@ int main() {
         }
 
         std::cout << std::endl;
+
+        printf(GREEN_COLOR "Done" RESET_COLOR "\n");
+
+        printf(YELLOW_COLOR "Testing additional funcs" RESET_COLOR "\n");
+
+        printf("Transpose:\n");
+
+        std::cout << test4 << std::endl;
+
+        auto transpose_m = test4.transpose();
+
+        std::cout << transpose_m;
 
         printf(GREEN_COLOR "Done" RESET_COLOR "\n");
 

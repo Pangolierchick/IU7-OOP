@@ -6,7 +6,7 @@ class baseMatrix {
   public:
     explicit baseMatrix() : elem_num(0) {}
     explicit baseMatrix(size_t n) : elem_num(n) {}
-    virtual ~baseMatrix() = default;
+    virtual ~baseMatrix() = 0;
 
     bool isEmpty() { return elem_num == 0; }
     size_t Rows() const { return rows; }
@@ -19,3 +19,5 @@ class baseMatrix {
 
     size_t elem_num;
 };
+
+baseMatrix::~baseMatrix () {}

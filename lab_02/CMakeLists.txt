@@ -17,6 +17,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR})
 
 add_definitions(-Wall -Wextra)
 
+find_package(OpenMP REQUIRED)
+
 set(PROJECT_SOURCES
     ${SOURCE_DIR}/main.cpp
 
@@ -27,8 +29,11 @@ set(PROJECT_SOURCES
 
     ${ITERATOR_DIR}/iterator.hpp
     ${ITERATOR_DIR}/const_iterator.hpp
+    ${ITERATOR_DIR}/iterator_exception.hpp
 )
 
 set_property(SOURCE ${PROJECT_SOURCES} PROPERTY CXX_STANDARD 11)
 
 add_executable(lab_02.out ${PROJECT_SOURCES})
+
+target_link_libraries(lab_02.out PRIVATE OpenMP::OpenMP_CXX)
