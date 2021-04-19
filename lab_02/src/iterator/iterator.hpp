@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 
-#include "matrix_exceptions.hpp"
 #include "iterator_exception.hpp"
+#include "matrix_exceptions.hpp"
 
 template <typename T>
 class Matrix;
@@ -70,7 +70,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
 
         if (__data.expired()) {
             throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
-                                   curr_time, "Data pointer is null.");
+                                         curr_time, "Data pointer is null.");
         }
 
         if (__index > __rows * __clms) {
@@ -90,7 +90,7 @@ class Iterator : public std::iterator<std::input_iterator_tag, T> {
 
         if (__data.expired()) {
             throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
-                                   curr_time, "Data pointer is null.");
+                                         curr_time, "Data pointer is null.");
         }
 
         if (__index >= __rows * __clms) {
