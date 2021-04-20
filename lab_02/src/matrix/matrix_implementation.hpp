@@ -386,13 +386,19 @@ Matrix<T>& Matrix<T>::divide(const Matrix<T>& m) {
 }
 
 template <typename T>
-Matrix<T>& Matrix<T>::mult(const T& value) const {
-    auto dst_ptr = data.get();
-
+Matrix<T>& Matrix<T>::mult(const T& value) {
     __mul(value);
 
     return (*this);
 }
+
+template <typename T>
+Matrix<T>& Matrix<T>::mult(const Matrix<T>& m) {
+    (*this) *= m;
+    return (*this);
+}
+
+
 
 template <typename T>
 T& Matrix<T>::operator()(size_t i, size_t j) {
@@ -573,7 +579,7 @@ size_t Matrix<T>::__rref() {
 }
 
 template <typename T>
-Matrix<T> Matrix<T>::inverted() {
+Matrix<T> Matrix<T>::inverted() const {
     if (rows != columns)
         throw MatrixDetException(__FILE__, typeid(*this).name(), __LINE__ - 1, time(nullptr),
                                  "Matrix must be square");
@@ -587,8 +593,6 @@ Matrix<T> Matrix<T>::inverted() {
         tmp.at(row, row + tmp.rows) = 1;
     }
 
-    std::cout << tmp;
-
     tmp.__rref();
 
     Matrix<T> inv(rows, rows);
@@ -597,8 +601,6 @@ Matrix<T> Matrix<T>::inverted() {
         for (size_t clm = 0; clm < rows; clm++)
             inv.at(row, clm) = tmp(row, clm + rows);
     }
-
-    std::cout << tmp;
 
     return inv;
 }
@@ -615,22 +617,44 @@ Matrix<T> Matrix<T>::transpose() const {
 }
 
 template <typename T>
+Matrix<T> Matrix<T>::__get_minor(size_t x, size_t y) {
+    size_t len = rows - 1;
+    Matrix<T> res(len, len);
+
+    for (size_t i = 0; i < len; i++) {
+        for (size_t j = 0; j < len; j++) {
+            if (i < x && j < y)
+                res.at(i, j) = at(i, j);
+            else if (i >= x && j < y)
+                res.at(i, j) = at(i + 1, j);
+            else if (i < x && j >= y)
+                res.at(i, j) = at(i, j + 1);
+            else 
+                res.at(i, j) = at(i + 1, j + 1);
+        }
+    }
+
+    return res;
+}
+
+template <typename T>
 T Matrix<T>::det() {
+    if (rows == 1 && columns == 1)
+        return at(0, 0);
+
     if (rows != columns)
         throw MatrixDetException(__FILE__, typeid(*this).name(), __LINE__ - 1, time(nullptr),
                                  "Matrix must be square");
+    
+    int sgn = 1;
+    T determ = 0;
 
-    Matrix<T> copy(*this);
-    size_t perm = -((copy.__rref() % 2) + 1);
-    printf("Copy\n");
-    std::cout << copy;
+    for (size_t i = 0; i < rows; i++) {
+        determ += sgn * at(0, i) * __get_minor(0, i).det();
+        sgn = -sgn;
+    }
 
-    T det_val = 1;
-
-    for (size_t row = 0; row < rows; row++)
-        det_val *= copy.at(row, row);
-
-    return (perm * perm) * det_val;
+    return determ;
 }
 
 template <typename T>

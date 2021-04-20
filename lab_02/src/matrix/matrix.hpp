@@ -52,7 +52,8 @@ class Matrix : virtual public baseMatrix {
     Matrix<T> operator*(const T& value) const;
     Matrix<T>& operator*=(const Matrix<T>& mtrx);
     Matrix<T>& operator*=(const T& value);
-    Matrix<T>& mult(const T& value) const;
+    Matrix<T>& mult(const T& value);
+    Matrix<T>& mult(const Matrix<T>& m);
 
     //============== DIVISION ==============
 
@@ -87,7 +88,7 @@ class Matrix : virtual public baseMatrix {
     static Matrix<T> identity_matrix(size_t r, size_t c);
 
     void swap_rows(size_t i, size_t j);
-    Matrix<T> inverted();
+    Matrix<T> inverted() const;
     T det();
     Matrix<T> transpose() const;
 
@@ -106,4 +107,6 @@ class Matrix : virtual public baseMatrix {
     void __div(const T& v);
 
     size_t __rref();
+
+    Matrix<T> __get_minor(size_t row, size_t clm);
 };

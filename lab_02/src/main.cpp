@@ -110,6 +110,27 @@ int main() {
 
         std::cout << transpose_m;
 
+        printf("\nTesting determinant:\n");
+
+        Matrix<float> det_m = { { 1, 2,  5 }, 
+                                { 3, 4, -6 },
+                                { 2, 9,  0 } };
+        float det = det_m.det();
+
+        printf("Det = %f\n", det);
+
+        printf("\nTesting m / m, m *= m.inv()\n");
+
+        auto inverted = det_m.inverted();
+
+        printf("M / M\n");
+        std::cout << det_m / det_m;
+
+        det_m *= inverted;
+
+        printf("\nM *= M.inv()\n");
+        std::cout << det_m;
+
         printf(GREEN_COLOR "Done" RESET_COLOR "\n");
 
     } catch (basicMatrixException& exception) {
