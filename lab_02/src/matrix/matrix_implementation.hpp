@@ -400,7 +400,6 @@ Matrix<T>& Matrix<T>::mult(const Matrix<T>& m) {
     return (*this);
 }
 
-
 template <typename T>
 T& Matrix<T>::operator()(size_t i, size_t j) {
     if (i >= rows || j >= columns) {
@@ -630,7 +629,7 @@ Matrix<T> Matrix<T>::__get_minor(size_t x, size_t y) {
                 res.at(i, j) = at(i + 1, j);
             else if (i < x && j >= y)
                 res.at(i, j) = at(i, j + 1);
-            else 
+            else
                 res.at(i, j) = at(i + 1, j + 1);
         }
     }
@@ -646,7 +645,7 @@ T Matrix<T>::det() {
     if (rows != columns)
         throw MatrixDetException(__FILE__, typeid(*this).name(), __LINE__ - 1, time(nullptr),
                                  "Matrix must be square");
-    
+
     int sgn = 1;
     T determ = 0;
 

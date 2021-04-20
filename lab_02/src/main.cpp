@@ -112,9 +112,9 @@ int main() {
 
         printf("\nTesting determinant:\n");
 
-        Matrix<float> det_m = { { 1, 2,  5 }, 
-                                { 3, 4, -6 },
-                                { 2, 9,  0 } };
+        Matrix<float> det_m = {{1, 2, 5},
+                               {3, 4, -6},
+                               {2, 9, 0}};
         float det = det_m.det();
 
         printf("Det = %f\n", det);
@@ -131,14 +131,12 @@ int main() {
         printf("\nM *= M.inv()\n");
         std::cout << det_m;
 
-
         printf(GREEN_COLOR "Done" RESET_COLOR "\n");
 
         printf(YELLOW_COLOR "Testing []" RESET_COLOR "\n");
 
-        Matrix<float> test_getter = { { 1, 2 }, 
-                                      { 3, 4 }
-                                    };
+        Matrix<float> test_getter = {{1, 2},
+                                     {3, 4}};
         float a = test_getter[0][2];
 
         printf("res: %f\n", a);
