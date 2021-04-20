@@ -94,6 +94,53 @@ class Matrix : virtual public baseMatrix {
 
     Matrix<T> triangle() const;
 
+    class MatrixRow {
+    public:
+        MatrixRow(const Matrix<T>& m, size_t row) : __m(m), __row(row) {};
+        explicit MatrixRow(const MatrixRow& r);
+        MatrixRow(MatrixRow&& m) : __m(m.__m), __row(m.__row) {};
+
+
+        T& operator [](size_t clm) {
+            if (clm >= __m.columns)
+                throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                             "Index out of bounds");
+
+            return __m.data.get()[__row * __m.columns + clm];
+        }
+
+        const T& operator [](size_t clm) const {
+            if (clm >= __m.columns)
+                throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                             "Index out of bounds");
+
+            return __m.data.get()[__row * __m.columns + clm];
+        }
+
+    private:
+        const Matrix<T>& __m;
+        size_t __row;
+    };
+
+    MatrixRow operator[](size_t row) {
+        if (row >= rows) {
+            throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                             "Index out of bounds");
+        }
+
+        return MatrixRow((*this), row);
+    }
+
+
+    const MatrixRow operator[](size_t row) const {
+        if (row >= rows) {
+            throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                             "Index out of bounds");
+        }
+
+        return MatrixRow(*this, row);
+    }
+
   private:
     std::shared_ptr<T> data = nullptr;
 

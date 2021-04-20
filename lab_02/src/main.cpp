@@ -131,6 +131,18 @@ int main() {
         printf("\nM *= M.inv()\n");
         std::cout << det_m;
 
+
+        printf(GREEN_COLOR "Done" RESET_COLOR "\n");
+
+        printf(YELLOW_COLOR "Testing []" RESET_COLOR "\n");
+
+        Matrix<float> test_getter = { { 1, 2 }, 
+                                      { 3, 4 }
+                                    };
+        float a = test_getter[0][2];
+
+        printf("res: %f\n", a);
+
         printf(GREEN_COLOR "Done" RESET_COLOR "\n");
 
     } catch (basicMatrixException& exception) {

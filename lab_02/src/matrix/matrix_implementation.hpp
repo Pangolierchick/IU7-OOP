@@ -4,6 +4,8 @@
 
 #include <iostream> // for endl
 
+class MatrixRow;
+
 template <typename T>
 Matrix<T>::Matrix() {
     rows = 0;
@@ -397,7 +399,6 @@ Matrix<T>& Matrix<T>::mult(const Matrix<T>& m) {
     (*this) *= m;
     return (*this);
 }
-
 
 
 template <typename T>
