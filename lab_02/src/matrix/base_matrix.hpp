@@ -3,7 +3,7 @@
 #include <cstddef>
 
 class baseMatrix {
-  public:
+public:
     explicit baseMatrix() : elem_num(0) {}
     explicit baseMatrix(size_t n) : elem_num(n) {}
     virtual ~baseMatrix() = 0;
@@ -13,7 +13,7 @@ class baseMatrix {
     size_t Columns() const { return columns; }
     size_t Size() const { return elem_num; }
 
-  protected:
+protected:
     size_t rows;
     size_t columns;
 

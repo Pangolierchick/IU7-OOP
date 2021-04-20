@@ -4,7 +4,7 @@
 #include <string>
 
 class basicMatrixException : public std::exception {
-  public:
+public:
     basicMatrixException(std::string file, std::string className, int line,
                          time_t time, std::string error_name) {
         error_msg = " File name: " + file + " in class: " + className +
@@ -16,12 +16,12 @@ class basicMatrixException : public std::exception {
         return this->error_msg.c_str();
     }
 
-  protected:
+protected:
     std::string error_msg;
 };
 
 class indexException : public basicMatrixException {
-  public:
+public:
     indexException(std::string file, std::string className, int line,
                    time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
@@ -30,7 +30,7 @@ class indexException : public basicMatrixException {
 };
 
 class NullPtrException : public basicMatrixException {
-  public:
+public:
     NullPtrException(std::string file, std::string className, int line,
                      time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
@@ -39,7 +39,7 @@ class NullPtrException : public basicMatrixException {
 };
 
 class MultMatrixException : public basicMatrixException {
-  public:
+public:
     MultMatrixException(std::string file, std::string className, int line,
                         time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
@@ -48,9 +48,18 @@ class MultMatrixException : public basicMatrixException {
 };
 
 class MatrixDetException : public basicMatrixException {
-  public:
+public:
     MatrixDetException(std::string file, std::string className, int line,
                        time_t time, std::string error_name)
+        : basicMatrixException(file, className, line, time, error_name){};
+
+    const char* what(void) const noexcept { return this->error_msg.c_str(); }
+};
+
+class badAllocException : public basicMatrixException {
+public:
+    badAllocException(std::string file, std::string className, int line,
+                      time_t time, std::string error_name)
         : basicMatrixException(file, className, line, time, error_name){};
 
     const char* what(void) const noexcept { return this->error_msg.c_str(); }

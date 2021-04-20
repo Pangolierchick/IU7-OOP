@@ -4,7 +4,7 @@
 #include <string>
 
 class baseIteratorException : public std::exception {
-  public:
+public:
     baseIteratorException(std::string file, std::string className, int line,
                           time_t time, std::string error_name) {
         error_msg = " File name: " + file + " in class: " + className +
@@ -16,12 +16,12 @@ class baseIteratorException : public std::exception {
         return this->error_msg.c_str();
     }
 
-  protected:
+protected:
     std::string error_msg;
 };
 
 class nullPointerIteratorExc : public baseIteratorException {
-  public:
+public:
     nullPointerIteratorExc(std::string file, std::string className, int line,
                            time_t time, std::string error_name) : baseIteratorException(file, className, line, time, error_name){};
 

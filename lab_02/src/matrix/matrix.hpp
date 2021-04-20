@@ -12,7 +12,7 @@ class Matrix : virtual public baseMatrix {
     friend Iterator<T>;
     friend constIterator<T>;
 
-  public:
+public:
     //================ CONSTRUCTORS ================
     Matrix();
     Matrix(size_t n, size_t m);
@@ -95,7 +95,7 @@ class Matrix : virtual public baseMatrix {
     Matrix<T> triangle() const;
 
     class MatrixRow {
-      public:
+    public:
         MatrixRow(const Matrix<T>& m, size_t row) : __m(m), __row(row){};
         explicit MatrixRow(const MatrixRow& r);
         MatrixRow(MatrixRow&& m) : __m(m.__m), __row(m.__row){};
@@ -116,7 +116,7 @@ class Matrix : virtual public baseMatrix {
             return __m.data.get()[__row * __m.columns + clm];
         }
 
-      private:
+    private:
         const Matrix<T>& __m;
         size_t __row;
     };
@@ -139,7 +139,7 @@ class Matrix : virtual public baseMatrix {
         return MatrixRow(*this, row);
     }
 
-  private:
+private:
     std::shared_ptr<T> data = nullptr;
 
     void __add(const Matrix<T>& m);

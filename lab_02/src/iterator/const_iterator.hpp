@@ -10,7 +10,7 @@
 
 template <typename T>
 class constIterator : public std::iterator<std::input_iterator_tag, T> {
-  public:
+public:
     constIterator(const Matrix<T>& matrix, const size_t index = 0)
         : __data(matrix.data), __index(index), __rows(matrix.rows),
           __clms(matrix.columns) {}
@@ -109,7 +109,7 @@ class constIterator : public std::iterator<std::input_iterator_tag, T> {
 
     constIterator<T>& next() { this->operator++(); }
 
-  private:
+private:
     std::weak_ptr<T> __data = nullptr;
 
     size_t __index = 0;

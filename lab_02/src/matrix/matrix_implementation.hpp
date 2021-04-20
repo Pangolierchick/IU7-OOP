@@ -21,7 +21,13 @@ Matrix<T>::Matrix(Matrix<T>&& m) {
     this->columns = m.columns;
     this->elem_num = m.Size();
 
-    this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     auto dst_ptr = data.get();
     auto src_ptr = m.data.get();
@@ -37,7 +43,13 @@ Matrix<T>::Matrix(size_t n, size_t m) {
     this->columns = m;
     this->elem_num = n * m;
 
-    this->data = std::shared_ptr<T>(new T[n * m]);
+    try {
+        this->data = std::shared_ptr<T>(new T[n * m]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     std::memset(data.get(), 0, sizeof(T) * n * m);
 }
@@ -48,7 +60,13 @@ Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> list) {
     this->columns = list.begin()->size();
     this->elem_num = rows * columns;
 
-    this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     auto buff_ptr = data.get();
     auto list_i = list.begin();
@@ -74,7 +92,13 @@ Matrix<T>::Matrix(const Matrix<T>& m) : baseMatrix() {
     this->columns = m.columns;
     this->elem_num = rows * columns;
 
-    this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     auto dst_ptr = data.get();
     auto src_ptr = m.data.get();
@@ -90,7 +114,13 @@ Matrix<T>::~Matrix() { this->data.reset(); }
 
 template <typename T>
 Matrix<T>& Matrix<T>::operator=(const Matrix<T>& mtr) {
-    this->data = std::shared_ptr<T>(new T[elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     rows = mtr.rows;
     columns = mtr.columns;
@@ -108,7 +138,13 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T>& mtr) {
 
 template <typename T>
 Matrix<T>& Matrix<T>::operator=(Matrix<T>&& mtr) {
-    this->data = std::shared_ptr<T>(new T[elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     auto src_ptr = mtr.data.get();
     auto dst_ptr = data.get();
@@ -128,7 +164,13 @@ Matrix<T>& Matrix<T>::operator=(std::initializer_list<std::initializer_list<T>> 
     this->columns = list.begin().size();
     this->elem_num = rows * columns;
 
-    this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    try {
+        this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
 
     auto buff_ptr = data.get();
     auto list_i = list.begin();
