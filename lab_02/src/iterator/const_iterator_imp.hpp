@@ -4,12 +4,12 @@
 
 template <typename T>
 constIterator<T>& constIterator<T>::operator=(const constIterator<T>& iter) {
-        __data = iter.__data;
-        __index = iter.__index;
-        __rows = iter.__rows;
-        __clms = iter.__clms;
+    __data = iter.__data;
+    __index = iter.__index;
+    __rows = iter.__rows;
+    __clms = iter.__clms;
 
-        return *this;
+    return *this;
 }
 
 template <typename T>
@@ -56,12 +56,12 @@ const T constIterator<T>::operator*() const {
 
     if (__data.expired()) {
         throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
-                                        curr_time, "Data pointer is null.");
+                                     curr_time, "Data pointer is null.");
     }
 
     if (__index >= __rows * __clms) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__,
-                                curr_time, "Const iterator out of bounds.");
+                             curr_time, "Const iterator out of bounds.");
     }
 
     std::shared_ptr<T> sh_ptr = __data.lock();
@@ -75,12 +75,12 @@ const T constIterator<T>::operator->() const {
 
     if (__data.expired()) {
         throw nullPointerIteratorExc(__FILE__, typeid(*this).name(), __LINE__,
-                                        curr_time, "Data pointer is null.");
+                                     curr_time, "Data pointer is null.");
     }
 
     if (__index >= __rows * __clms) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__,
-                                curr_time, "Const iterator out of bounds.");
+                             curr_time, "Const iterator out of bounds.");
     }
 
     std::shared_ptr<T> sh_ptr = __data.lock();

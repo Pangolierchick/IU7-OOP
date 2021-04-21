@@ -22,7 +22,7 @@ public:
 
     constIterator<T>& operator=(const constIterator<T>& iter);
     constIterator<T>& operator++();
-    constIterator<T>  operator++(int);
+    constIterator<T> operator++(int);
     constIterator<T>& operator+(size_t val) const;
     constIterator<T>& operator+=(size_t val);
 

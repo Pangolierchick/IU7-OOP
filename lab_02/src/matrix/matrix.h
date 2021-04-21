@@ -2,41 +2,40 @@
 
 #include "base_matrix.h"
 #include "const_iterator.h"
+#include "const_iterator_imp.hpp"
 #include "iterator.h"
 #include "iterator_imp.hpp"
-#include "const_iterator_imp.hpp"
 
 #include <initializer_list>
 #include <memory>
 
 template <typename _T>
 class MatrixRow {
-    public:
-        MatrixRow(const Matrix<_T>& m, size_t row) : __m(m), __row(row){};
-        explicit MatrixRow(const MatrixRow& r);
-        MatrixRow(MatrixRow&& m) : __m(m.__m), __row(m.__row){};
+public:
+    MatrixRow(const Matrix<_T>& m, size_t row) : __m(m), __row(row){};
+    explicit MatrixRow(const MatrixRow& r);
+    MatrixRow(MatrixRow&& m) : __m(m.__m), __row(m.__row){};
 
-        _T& operator[](size_t clm) {
-            if (clm >= __m.Columns())
-                throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-                                     "Index out of bounds");
+    _T& operator[](size_t clm) {
+        if (clm >= __m.Columns())
+            throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                                 "Index out of bounds");
 
-            return __m.data.get()[__row * __m.Columns() + clm];
-        }
+        return __m.data.get()[__row * __m.Columns() + clm];
+    }
 
-        const _T& operator[](size_t clm) const {
-            if (clm >= __m.Columns())
-                throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-                                     "Index out of bounds");
+    const _T& operator[](size_t clm) const {
+        if (clm >= __m.Columns())
+            throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                                 "Index out of bounds");
 
-            return __m.data.get()[__row * __m.Columns() + clm];
-        }
+        return __m.data.get()[__row * __m.Columns() + clm];
+    }
 
-    private:
-        const Matrix<_T>& __m;
-        size_t __row;
+private:
+    const Matrix<_T>& __m;
+    size_t __row;
 };
-
 
 template <typename T>
 class Matrix : virtual public baseMatrix {
@@ -47,7 +46,7 @@ class Matrix : virtual public baseMatrix {
 public:
     //================ CONSTRUCTORS ================
     Matrix();
-    Matrix(T **m, size_t row, size_t clm);
+    Matrix(T** m, size_t row, size_t clm);
     Matrix(size_t n, size_t m);
     explicit Matrix(const Matrix<T>& mtrx);
     Matrix(Matrix<T>&& m);
@@ -127,7 +126,6 @@ public:
     Matrix<T> inverted() const;
     T det();
     Matrix<T> transpose() const;
-
 
 private:
     std::shared_ptr<T> data = nullptr;

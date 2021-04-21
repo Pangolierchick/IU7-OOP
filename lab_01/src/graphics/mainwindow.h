@@ -18,11 +18,11 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-  public:
+public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
-  private slots:
+private slots:
     void on_rotateButton_clicked();
 
     void on_moveButton_clicked();
@@ -35,7 +35,7 @@ class MainWindow : public QMainWindow {
 
     int drawModel();
 
-  private:
+private:
     Ui::MainWindow* ui;
 };
 #endif // MAINWINDOW_H
