@@ -1,7 +1,7 @@
 #include <cstdio>
 
-#include "iterator.hpp"
-#include "matrix.hpp"
+#include "iterator.h"
+#include "matrix.h"
 #include "matrix_implementation.hpp"
 
 #define RED_COLOR "\u001b[31m"
@@ -137,7 +137,7 @@ int main() {
 
         Matrix<float> test_getter = {{1, 2},
                                      {3, 4}};
-        float a = test_getter[0][2];
+        float a = test_getter[0][1];
 
         printf("res: %f\n", a);
 

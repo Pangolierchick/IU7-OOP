@@ -22,14 +22,18 @@ find_package(OpenMP REQUIRED)
 set(PROJECT_SOURCES
     ${SOURCE_DIR}/main.cpp
 
-    ${MATRIX_DIR}/base_matrix.hpp
-    ${MATRIX_DIR}/matrix_exceptions.hpp
+    ${MATRIX_DIR}/base_matrix.h
+    ${MATRIX_DIR}/matrix_exceptions.h
     ${MATRIX_DIR}/matrix_implementation.hpp
-    ${MATRIX_DIR}/matrix.hpp
+    ${MATRIX_DIR}/matrix.h
 
-    ${ITERATOR_DIR}/iterator.hpp
-    ${ITERATOR_DIR}/const_iterator.hpp
-    ${ITERATOR_DIR}/iterator_exception.hpp
+    ${ITERATOR_DIR}/const_iterator.h
+    ${ITERATOR_DIR}/const_iterator_imp.hpp
+    
+    ${ITERATOR_DIR}/iterator.h
+    ${ITERATOR_DIR}/iterator_imp.hpp
+    
+    ${ITERATOR_DIR}/iterator_exception.h
 )
 
 set_property(SOURCE ${PROJECT_SOURCES} PROPERTY CXX_STANDARD 11)

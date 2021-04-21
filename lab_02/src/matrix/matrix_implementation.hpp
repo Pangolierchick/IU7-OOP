@@ -1,10 +1,8 @@
 #pragma once
 
-#include "matrix.hpp"
+#include "matrix.h"
 
 #include <iostream> // for endl
-
-class MatrixRow;
 
 template <typename T>
 Matrix<T>::Matrix() {
@@ -13,6 +11,40 @@ Matrix<T>::Matrix() {
     elem_num = 0;
 
     data = nullptr;
+}
+
+template <typename T>
+Matrix<T>::Matrix(T **m, size_t row, size_t clm) {
+    rows = row;
+    columns = clm;
+    elem_num = row * clm;
+    
+    if (m == nullptr)
+        throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Pointer to matrix is null");
+
+    try {
+        this->data = std::shared_ptr<T>(new T[this->elem_num]);
+    } catch (std::bad_alloc) {
+        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Bad alloc");
+    }
+
+    auto dst_ptr = data.get();
+
+    for (size_t i = 0; i < rows; i++) {
+
+        if (m[i] == nullptr)
+            throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
+                                time(nullptr),
+                                "Pointer to matrix is null");
+
+        for (size_t j = 0; j < clm; j++) {
+            dst_ptr[i * columns + j] = m[i][j];
+        }
+    }
 }
 
 template <typename T>
@@ -460,6 +492,26 @@ const T& Matrix<T>::operator()(size_t i, size_t j) const {
     }
 
     return data.get()[i * columns + j];
+}
+
+template <typename T>
+MatrixRow<T> Matrix<T>::operator[](size_t row) {
+    if (row >= rows) {
+        throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                                "Index out of bounds");
+    }
+
+    return MatrixRow<T>((*this), row);
+}
+
+template <typename T>
+const MatrixRow<T> Matrix<T>::operator[](size_t row) const {
+    if (row >= rows) {
+        throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
+                                "Index out of bounds");
+    }
+
+    return MatrixRow<T>((*this), row);
 }
 
 template <typename _T>
