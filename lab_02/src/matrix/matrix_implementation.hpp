@@ -49,24 +49,11 @@ Matrix<T>::Matrix(T **m, size_t row, size_t clm) {
 
 template <typename T>
 Matrix<T>::Matrix(Matrix<T>&& m) {
-    this->rows = m.rows;
     this->columns = m.columns;
+    this->rows = m.rows;
     this->elem_num = m.Size();
 
-    try {
-        this->data = std::shared_ptr<T>(new T[this->elem_num]);
-    } catch (std::bad_alloc) {
-        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
-                                time(nullptr),
-                                "Bad alloc");
-    }
-
-    auto dst_ptr = data.get();
-    auto src_ptr = m.data.get();
-
-    for (size_t i = 0; i < rows; i++)
-        for (size_t j = 0; j < columns; j++)
-            dst_ptr[i * columns + j] = src_ptr[i * columns + j];
+    this->data = m.data;
 }
 
 template <typename T>
@@ -170,22 +157,11 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T>& mtr) {
 
 template <typename T>
 Matrix<T>& Matrix<T>::operator=(Matrix<T>&& mtr) {
-    try {
-        this->data = std::shared_ptr<T>(new T[elem_num]);
-    } catch (std::bad_alloc) {
-        throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
-                                time(nullptr),
-                                "Bad alloc");
-    }
+    this->columns = mtr.columns;
+    this->rows = mtr.rows;
+    this->elem_num = mtr.rows * mtr.columns;
 
-    auto src_ptr = mtr.data.get();
-    auto dst_ptr = data.get();
-
-    for (size_t i = 0; i < rows; i++)
-        for (size_t j = 0; j < columns; j++)
-            dst_ptr[i * columns + j] = src_ptr[i * columns + j];
-
-    mtr.data.reset();
+    this->data = mtr.data;
 
     return *this;
 }
