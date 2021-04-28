@@ -14,15 +14,15 @@ Matrix<T>::Matrix() {
 }
 
 template <typename T>
-Matrix<T>::Matrix(T **m, size_t row, size_t clm) {
+Matrix<T>::Matrix(T** m, size_t row, size_t clm) {
     rows = row;
     columns = clm;
     elem_num = row * clm;
-    
+
     if (m == nullptr)
         throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
-                                time(nullptr),
-                                "Pointer to matrix is null");
+                               time(nullptr),
+                               "Pointer to matrix is null");
 
     try {
         this->data = std::shared_ptr<T>(new T[this->elem_num]);
@@ -38,8 +38,8 @@ Matrix<T>::Matrix(T **m, size_t row, size_t clm) {
 
         if (m[i] == nullptr)
             throw NullPtrException(__FILE__, typeid(*this).name(), __LINE__,
-                                time(nullptr),
-                                "Pointer to matrix is null");
+                                   time(nullptr),
+                                   "Pointer to matrix is null");
 
         for (size_t j = 0; j < clm; j++) {
             dst_ptr[i * columns + j] = m[i][j];
@@ -474,7 +474,7 @@ template <typename T>
 MatrixRow<T> Matrix<T>::operator[](size_t row) {
     if (row >= rows) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-                                "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return MatrixRow<T>((*this), row);
@@ -484,7 +484,7 @@ template <typename T>
 const MatrixRow<T> Matrix<T>::operator[](size_t row) const {
     if (row >= rows) {
         throw indexException(__FILE__, typeid(*this).name(), __LINE__, time(nullptr),
-                                "Index out of bounds");
+                             "Index out of bounds");
     }
 
     return MatrixRow<T>((*this), row);
