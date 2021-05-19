@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QObject>
 #include "defines.h"
+#include <QObject>
 
 class LiftController : public QObject {
     Q_OBJECT
@@ -26,10 +26,10 @@ private:
     int __curr_floor;
     int __curr_target = 0;
 
-    QVector<bool>   __target_map;
+    QVector<bool> __target_map;
     ControllerState __state;
-    MoveDirection   __direction;
+    MoveDirection __direction;
 
-    bool nextTarget(int &floor);
+    bool nextTarget(int& floor);
     void findNewTarget();
 };

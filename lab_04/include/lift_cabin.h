@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QObject>
-#include <QTimer>
 #include "defines.h"
 #include "lift_doors.h"
+#include <QObject>
+#include <QTimer>
 
 class LiftCabin : public QObject {
     Q_OBJECT
@@ -34,8 +34,8 @@ private:
     int __target_floor;
     bool __new_target;
 
-    CabinState    __state;
+    CabinState __state;
     MoveDirection __direction;
-    LiftDoors     __doors;
-    QTimer        __floor_move_timer;
+    LiftDoors __doors;
+    QTimer __floor_move_timer;
 };

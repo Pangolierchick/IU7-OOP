@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QMainWindow>
 #include "lift.h"
+#include <QMainWindow>
 
 namespace Ui {
 class MainWindow;

@@ -1,20 +1,18 @@
-#include <qdebug>
 #include "lift_cabin.h"
+#include <qdebug>
 
-
-LiftCabin::LiftCabin(QObject *parent) : QObject(parent), 
-                                __curr_floor(START_POS), 
-                                __target_floor(START_STATE), 
-                                __new_target(false),
-                                __state(STOPPED),
-                                __direction(NONE) 
-{
+LiftCabin::LiftCabin(QObject* parent) : QObject(parent),
+                                        __curr_floor(START_POS),
+                                        __target_floor(START_STATE),
+                                        __new_target(false),
+                                        __state(STOPPED),
+                                        __direction(NONE) {
     QObject::connect(this, SIGNAL(cabinCalled()), &__doors, SLOT(closing()));
     QObject::connect(this, SIGNAL(cabinReachedFloor(int)), this, SLOT(cabinStop()));
     QObject::connect(this, SIGNAL(cabinStopped(int)), &__doors, SLOT(openning()));
 
     QObject::connect(&__doors, SIGNAL(closedDoors()), this, SLOT(cabinMove()));
-    
+
     __floor_move_timer.setSingleShot(true);
 
     QObject::connect(&__floor_move_timer, SIGNAL(timeout()), this, SLOT(cabinMove()));
@@ -65,7 +63,7 @@ void LiftCabin::cabinCall(int floor) {
             __direction = DOWN;
         else
             __direction = NONE;
-        
+
         emit cabinCalled();
     }
 }

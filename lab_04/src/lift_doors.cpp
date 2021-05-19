@@ -1,8 +1,8 @@
-#include <qdebug>
 #include "lift_doors.h"
 #include "defines.h"
+#include <qdebug>
 
-LiftDoors::LiftDoors(QObject *parent) : QObject(parent), __state(CLOSED) {
+LiftDoors::LiftDoors(QObject* parent) : QObject(parent), __state(CLOSED) {
     __open_timer.setSingleShot(true);
     __close_timer.setSingleShot(true);
 
@@ -19,7 +19,7 @@ LiftDoors::LiftDoors(QObject *parent) : QObject(parent), __state(CLOSED) {
 void LiftDoors::openning() {
     if (__state == CLOSED) {
         qDebug() << "Doors are openning.";
-        
+
         __state = OPENNING;
         __open_timer.start(DOORS_MOVING_TIME);
     }

@@ -1,13 +1,12 @@
-#include <qdebug>
 #include "lift_controller.h"
+#include <qdebug>
 
-LiftController::LiftController(QObject *parent) : QObject(parent), 
-                                                  __curr_floor(START_POS), 
+LiftController::LiftController(QObject* parent) : QObject(parent),
+                                                  __curr_floor(START_POS),
                                                   __curr_target(START_STATE),
                                                   __target_map(FLOORS_NUM, false),
                                                   __state(PENDING),
                                                   __direction(NONE) {}
-
 
 void LiftController::newTarget(int floor) {
     __state = RUNNING;
@@ -25,7 +24,7 @@ void LiftController::newTarget(int floor) {
         __direction = UP;
     else
         __direction = DOWN;
-    
+
     emit setTarget(floor);
 }
 
@@ -54,7 +53,7 @@ void LiftController::traversedFloor(int floor) {
     qDebug() << "Moving. Floor #" << floor;
 }
 
-bool LiftController::nextTarget(int &floor) {
+bool LiftController::nextTarget(int& floor) {
     bool is_found = false;
     bool first = true;
 
@@ -76,7 +75,7 @@ bool LiftController::nextTarget(int &floor) {
         }
     }
 
-    return is_found; 
+    return is_found;
 }
 
 void LiftController::findNewTarget() {
@@ -94,5 +93,3 @@ void LiftController::findNewTarget() {
         }
     }
 }
-
-
