@@ -1,12 +1,13 @@
 #pragma once
 
 #include <QObject>
+#include <QTimer>
 
-class LiftDoors : QObject {
+class LiftDoors : public QObject {
     Q_OBJECT
 
     enum DoorState {
-        OPENED,
+        OPEN,
         CLOSED,
         OPENNING,
         CLOSING

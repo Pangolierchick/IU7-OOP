@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include "lift.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,4 +38,5 @@ private slots:
 
 private:
     Ui::MainWindow* ui_;
+    Lift lift;
 };

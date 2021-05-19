@@ -1,9 +1,15 @@
 #pragma once
 
 #include <QObject>
+#include "defines.h"
 
 class LiftController : public QObject {
     Q_OBJECT
+
+    enum ControllerState {
+        RUNNING,
+        PENDING,
+    };
 
 public:
     explicit LiftController(QObject* parent = nullptr);
@@ -17,10 +23,13 @@ public slots:
     void traversedFloor(int floor);
 
 private:
-    int __cur_floor;
-    int __curr_target = 0; //FIXME
+    int __curr_floor;
+    int __curr_target = 0;
 
-    QVector<bool> __target_map;
-    bool nextTarget(int floor);
+    QVector<bool>   __target_map;
+    ControllerState __state;
+    MoveDirection   __direction;
+
+    bool nextTarget(int &floor);
     void findNewTarget();
 };
