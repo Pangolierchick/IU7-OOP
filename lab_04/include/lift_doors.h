@@ -34,4 +34,3 @@ private:
     QTimer __close_timer;
     QTimer __wait_timer;
 };
- 
