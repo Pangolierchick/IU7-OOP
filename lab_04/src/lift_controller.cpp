@@ -28,6 +28,7 @@ void LiftController::newTarget(int floor) {
     emit setTarget(floor);
 }
 
+// FIXME
 void LiftController::reachedFloor(int floor) {
     if (__state == RUNNING) {
         __curr_floor = floor;
