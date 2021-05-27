@@ -3,22 +3,23 @@
 
 #include <QMainWindow>
 
-#define WIN_X               841
-#define WIN_Y               661
+#define WIN_X 911
+#define WIN_Y 771
 
-#define GRAPHIC_START_X     300
-#define GRAPHIC_START_Y     60
+#define GRAPHIC_START_X 270
+#define GRAPHIC_START_Y 0
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -35,6 +36,6 @@ private slots:
     int drawModel();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
 };
 #endif // MAINWINDOW_H

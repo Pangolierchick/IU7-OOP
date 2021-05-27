@@ -1,6 +1,6 @@
 #include "builder/model/model_builder.h"
 
-bool ModelBuilder::is_builded() const {
+bool ModelBuilder::is_built() const {
     return model_pointer != nullptr;
 }
 

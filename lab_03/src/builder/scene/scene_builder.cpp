@@ -1,6 +1,6 @@
 #include "builder/scene/scene_builder.h"
 
-bool SceneBuilder::is_builded() const {
+bool SceneBuilder::is_built() const {
     return scene_pointer != nullptr;
 }
 

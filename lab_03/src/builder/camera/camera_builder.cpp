@@ -1,6 +1,6 @@
 #include <builder/camera/camera_builder.h>
 
-bool CameraBuilder::is_builded() const {
+bool CameraBuilder::is_built() const {
     return camera_pointer != nullptr;
 }
 

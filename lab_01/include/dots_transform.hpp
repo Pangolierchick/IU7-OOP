@@ -2,7 +2,7 @@
 
 #include "dot.hpp"
 
-#define PI 3.1415
+#define PI 3.14159265
 
 struct move {
     double x;
@@ -28,6 +28,6 @@ struct rotate {
 
 using rotate_t = struct rotate;
 
-void move_dot(dot_t &dot, const move_t &mv);
-void scale_dot(dot_t &dot, const scale_t &scale);
-void rotate_dot(dot_t &dot, const rotate_t &rotate);
+void move_dot(dot_t& dot, const move_t& mv);
+void scale_dot(dot_t& dot, const scale_t& scale);
+void rotate_dot(dot_t& dot, const rotate_t& rotate);

@@ -17,20 +17,24 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(SOURCE_DIR src)
 set(INCLUDE_DIR include)
+set(GRAPHICS_DIR graphics)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_DIR}/${GRAPHICS_DIR})
 
-add_definitions(-Wall -Wextra -O2)
+add_definitions(-Wall -Wextra)
 
 set(PROJECT_SOURCES
         ${SOURCE_DIR}/main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/mainwindow.cpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/mainwindow.h
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/mainwindow.ui
         ${SOURCE_DIR}/edge.cpp
         ${SOURCE_DIR}/dot.cpp
         ${SOURCE_DIR}/model.cpp
         ${INCLUDE_DIR}/edge.hpp
+        ${INCLUDE_DIR}/error.hpp
+        ${SOURCE_DIR}/error.cpp
         ${INCLUDE_DIR}/dot.hpp
         ${INCLUDE_DIR}/model.hpp
         ${INCLUDE_DIR}/main.hpp
@@ -50,9 +54,13 @@ set(PROJECT_SOURCES
         ${INCLUDE_DIR}/model_transform.hpp
         ${SOURCE_DIR}/manager.cpp
         ${INCLUDE_DIR}/manager.hpp
+        ${SOURCE_DIR}/dots_arr_transform.cpp
+        ${INCLUDE_DIR}/dots_arr_transform.hpp
         ${INCLUDE_DIR}/commands.hpp
-        draw.cpp
-        draw.hpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/draw.cpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/draw.hpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/qt_wrap.cpp
+        ${SOURCE_DIR}/${GRAPHICS_DIR}/qt_wrap.hpp
         ${INCLUDE_DIR}/logger.h
 )
 

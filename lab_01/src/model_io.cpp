@@ -1,66 +1,88 @@
-#include <cstdio>
-#include "model.hpp"
 #include "model_io.hpp"
-#include "edges_io.hpp"
-#include "defines.hpp"
-#include "edges_io.hpp"
 #include "dot_io.hpp"
+#include "edges_io.hpp"
+#include "error.hpp"
 #include "logger.h"
+#include "model.hpp"
+#include <cstdio>
 
-int get_model(model_t &model, FILE *file) {
-    auto dots  = init_dots_array();
-    auto edges = init_edges_arr();
-
-    int res = get_dots(dots, file);
-
-    if (res) {
-        ERROR_PRINT("Getting dots failed\n");
-        return res;
-    }
-
-    res = get_edges(edges, file);
-
-    if (res) {
-        ERROR_PRINT("Getting edges failed\n");
-        destroy_dots(dots);
-        return res;
-    }
-
-    model = init_model(&dots, &edges);
+int read_center(dot_t& d, FILE* file) {
+    if (fscanf(file, "%lf %lf %lf", &d.x, &d.y, &d.z) != 3)
+        return BAD_CENTER;
 
     return OK;
 }
 
-int read_from_file(model_t &model, const char *filename) {
-    if (model.dots.dots != nullptr) {
-        return ALREADY_LOADED;
+int read_model(model_t& model, FILE* file) {
+    dots_arr_t dots = init_dots_array();
+    edges_arr_t edges = init_edges_arr();
+
+    int res = get_dots(dots, file);
+
+    if (!res)
+        res = get_edges(edges, file);
+
+    if (res) {
+        ERROR_PRINT("Getting edges failed\n");
+        destroy_dots(dots);
     }
-    
-    DBG_PRINT("Trying to load %s ... ", filename);
-    FILE *f = fopen(filename, "r");
+
+    dot_t center;
+
+    if (!res) {
+        res = read_center(center, file);
+    }
+
+    if (!res) {
+        model = init_model(&dots, &edges);
+        set_center(model, center);
+    } else {
+        destroy_dots(dots);
+        destroy_edges(edges);
+    }
+
+    return res;
+}
+
+int read_from_file(model_t& model, const char* filename) {
+    FILE* f = fopen(filename, "r");
 
     if (f == NULL) {
         DBG_PRINTF("%s\n", "Failed");
         return READ_ERROR;
     }
 
-    DBG_PRINTF("%s\n", "Done");
+    model_t temp_model = init_model();
+    int res = read_model(temp_model, f);
 
-    int res = get_model(model, f);
+    if (res) {
+        fclose(f);
+        return res;
+    }
+
+    dots_arr_t dots = get_dots_arr(model);
+
+    if (!dot_arr_is_empty(dots)) {
+        destroy_model(model);
+    }
+
+    model = temp_model;
 
     fclose(f);
 
     return res;
 }
 
+static int dump_dots(const model_t& model, FILE* file) {
+    dots_arr_t dot_arr = get_dots_arr((model_t&)model);
+    unsigned int ndots = get_dots_num(dot_arr);
 
-static int dump_dots(const model_t &model, FILE *file) {
-    dots_arr_t dot_arr = model.dots;
-
-    if (dot_arr.dots) {
-        fprintf(file, "%u\n", dot_arr.n_dots);
-        for (unsigned int i = 0; i < dot_arr.n_dots; i++)
-            fprintf(file, "%lf %lf %lf\n", dot_arr.dots[i].x, dot_arr.dots[i].y, dot_arr.dots[i].z);
+    if (ndots) {
+        fprintf(file, "%u\n", ndots);
+        for (unsigned int i = 0; i < ndots; i++) {
+            dot_t dot = get_dot(dot_arr, i);
+            fprintf(file, "%lf %lf %lf\n", dot.x, dot.y, dot.z);
+        }
     }
 
     fprintf(file, "\n");
@@ -68,14 +90,17 @@ static int dump_dots(const model_t &model, FILE *file) {
     return OK;
 }
 
-static int dump_edges(const model_t &model, FILE *file) {
-    edges_arr_t edge_arr = model.edges;
+static int dump_edges(const model_t& model, FILE* file) {
+    edges_arr_t edge_arr = get_edges_arr((model_t&)model);
+    unsigned int nedges = get_edges_num(edge_arr);
 
-    if (edge_arr.edges) {
-        fprintf(file, "%u\n", edge_arr.edges_num);
+    if (nedges) {
+        fprintf(file, "%u\n", nedges);
 
-        for (unsigned int i = 0; i < edge_arr.edges_num; i++)
-            fprintf(file, "%d %d\n", edge_arr.edges[i].d1, edge_arr.edges[i].d2);
+        for (unsigned int i = 0; i < nedges; i++) {
+            edge_t edge = get_edge(edge_arr, i);
+            fprintf(file, "%d %d\n", edge.d1, edge.d2);
+        }
     }
 
     fprintf(file, "\n");
@@ -83,8 +108,16 @@ static int dump_edges(const model_t &model, FILE *file) {
     return OK;
 }
 
-int save_to_file(const model_t &model, const char *filename) {
-    FILE *f = fopen(filename, "w");
+static int dump_center(const model_t& model, FILE* file) {
+    dot_t center = model.center;
+
+    fprintf(file, "%lf %lf %lf\n", center.x, center.y, center.z);
+
+    return OK;
+}
+
+int save_to_file(const model_t& model, const char* filename) {
+    FILE* f = fopen(filename, "w");
 
     if (f == NULL) {
         return WRITE_ERROR;
@@ -92,6 +125,7 @@ int save_to_file(const model_t &model, const char *filename) {
 
     dump_dots(model, f);
     dump_edges(model, f);
+    dump_center(model, f);
 
     fclose(f);
 
