@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 
-#define VERSION              "0.2"
+#define VERSION              "0.5"
 
-#define LOG_LEVEL           NO_LOG
+#define LOG_LEVEL           TRACE
 
 #define NO_LOG              0
 #define ERROR               1

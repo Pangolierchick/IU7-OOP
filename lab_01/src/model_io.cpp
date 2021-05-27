@@ -5,6 +5,7 @@
 #include "defines.hpp"
 #include "edges_io.hpp"
 #include "dot_io.hpp"
+#include "logger.h"
 
 int get_model(model_t &model, FILE *file) {
     auto dots  = init_dots_array();
@@ -12,12 +13,15 @@ int get_model(model_t &model, FILE *file) {
 
     int res = get_dots(dots, file);
 
-    if (res)
+    if (res) {
+        ERROR_PRINT("Getting dots failed\n");
         return res;
+    }
 
     res = get_edges(edges, file);
 
     if (res) {
+        ERROR_PRINT("Getting edges failed\n");
         destroy_dots(dots);
         return res;
     }
@@ -32,13 +36,21 @@ int read_from_file(model_t &model, const char *filename) {
         return ALREADY_LOADED;
     }
     
+    DBG_PRINT("Trying to load %s ... ", filename);
     FILE *f = fopen(filename, "r");
 
     if (f == NULL) {
+        DBG_PRINTF("%s\n", "Failed");
         return READ_ERROR;
     }
 
-    return get_model(model, f);
+    DBG_PRINTF("%s\n", "Done");
+
+    int res = get_model(model, f);
+
+    fclose(f);
+
+    return res;
 }
 
 

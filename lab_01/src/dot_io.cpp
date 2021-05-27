@@ -15,9 +15,11 @@ static int read_points(dots_arr_t &dots, FILE *file) {
     int read_res = 3;
 
     while (read_res == 3 && dot_num < dots.n_dots) {
-        read_res = fscanf(file, "%lf %lf %lf", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].z);
+        read_res = fscanf(file, "%lf %lf %lf\n", &dots.dots[dot_num].x, &dots.dots[dot_num].y, &dots.dots[dot_num].z);
         dot_num++;
     }
+
+    printf("Read res: %d\n", read_res);
     
     return read_res != 3;
 }
@@ -30,12 +32,13 @@ int get_dots(dots_arr_t &dots, FILE *file) {
     if (dots_num == -1)
         return BAD_DOTS_NUM;
     
-    
     if (allocate_dots(tmp_dots_arr, dots_num)) {
         return ALLOC_ERROR;
     }
     
     int rc = read_points(tmp_dots_arr, file);
+
+    printf("Rc after getting dots %d\n", rc);
 
     if (rc)
         destroy_dots(tmp_dots_arr);
