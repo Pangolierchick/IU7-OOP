@@ -19,7 +19,7 @@ void SceneManager::set_scene(std::shared_ptr<Scene> scene) {
     _scene = std::move(scene);
 }
 
-void SceneManager::set_camera(const size_t &camera_number) {
+void SceneManager::set_camera(const size_t& camera_number) {
     auto camera = _scene->get_cameras().at(camera_number);
     current_camera = camera;
 }

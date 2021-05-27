@@ -1,8 +1,8 @@
 #include <builder/model/model_builder.h>
-#include <loader/model/model_loader_file.h>
 #include <error/error.h>
+#include <loader/model/model_loader_file.h>
 
-FileModelLoader::FileModelLoader(std::shared_ptr<std::ifstream> &read_file) {
+FileModelLoader::FileModelLoader(std::shared_ptr<std::ifstream>& read_file) {
     file = read_file;
 }
 
@@ -30,7 +30,7 @@ std::shared_ptr<Object> FileModelLoader::load(std::shared_ptr<ModelBuilder> buil
     return builder->get();
 }
 
-void FileModelLoader::open(std::string &filename) {
+void FileModelLoader::open(std::string& filename) {
     if (!file) {
         std::string message = "Error while open file.";
         throw FileError(message);

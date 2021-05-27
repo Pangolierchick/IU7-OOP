@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QVariant>
 #include <QApplication>
 #include <QComboBox>
 #include <QDoubleSpinBox>
@@ -10,70 +9,69 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QVariant>
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
-{
+class Ui_MainWindow {
 public:
-    QWidget *centralwidget;
-    QGraphicsView *graphicsView;
-    QGroupBox *groupBox;
-    QGroupBox *groupBox_3;
-    QWidget *verticalLayoutWidget_3;
-    QVBoxLayout *verticalLayout_3;
-    QDoubleSpinBox *doubleSpinBox_move_x;
-    QDoubleSpinBox *doubleSpinBox_move_y;
-    QDoubleSpinBox *doubleSpinBox_move_z;
-    QWidget *verticalLayoutWidget_4;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *label_4;
-    QLabel *label_5;
-    QLabel *label_6;
-    QPushButton *pushButton_move;
-    QGroupBox *groupBox_4;
-    QWidget *verticalLayoutWidget_5;
-    QVBoxLayout *verticalLayout_5;
-    QDoubleSpinBox *doubleSpinBox_scale_x;
-    QDoubleSpinBox *doubleSpinBox_scale_y;
-    QDoubleSpinBox *doubleSpinBox_scale_z;
-    QWidget *verticalLayoutWidget_6;
-    QVBoxLayout *verticalLayout_6;
-    QLabel *label_7;
-    QLabel *label_8;
-    QLabel *label_9;
-    QPushButton *pushButton_scale;
-    QGroupBox *groupBox_5;
-    QWidget *verticalLayoutWidget_7;
-    QVBoxLayout *verticalLayout_7;
-    QDoubleSpinBox *doubleSpinBox_spin_x;
-    QDoubleSpinBox *doubleSpinBox_spin_y;
-    QDoubleSpinBox *doubleSpinBox_spin_z;
-    QWidget *verticalLayoutWidget_8;
-    QVBoxLayout *verticalLayout_8;
-    QLabel *label_10;
-    QLabel *label_11;
-    QLabel *label_12;
-    QPushButton *pushButton_spin;
-    QGroupBox *groupBox_6;
-    QPushButton *pushButton_del_model_all;
-    QComboBox *comboBox_models;
-    QPushButton *pushButton_del_model_cur;
-    QPushButton *pushButton_load_model;
-    QGroupBox *groupBox_7;
-    QGroupBox *groupBox_8;
-    QComboBox *comboBox_cameras;
-    QPushButton *pushButton_del_camera_cur;
-    QGroupBox *groupBox_9;
-    QPushButton *pushButton_camera_move_right;
-    QPushButton *pushButton_camera_move_left;
-    QPushButton *pushButton_camera_move_up;
-    QPushButton *pushButton_camera_move_down;
-    QPushButton *pushButton_add_camera;
+    QWidget* centralwidget;
+    QGraphicsView* graphicsView;
+    QGroupBox* groupBox;
+    QGroupBox* groupBox_3;
+    QWidget* verticalLayoutWidget_3;
+    QVBoxLayout* verticalLayout_3;
+    QDoubleSpinBox* doubleSpinBox_move_x;
+    QDoubleSpinBox* doubleSpinBox_move_y;
+    QDoubleSpinBox* doubleSpinBox_move_z;
+    QWidget* verticalLayoutWidget_4;
+    QVBoxLayout* verticalLayout_4;
+    QLabel* label_4;
+    QLabel* label_5;
+    QLabel* label_6;
+    QPushButton* pushButton_move;
+    QGroupBox* groupBox_4;
+    QWidget* verticalLayoutWidget_5;
+    QVBoxLayout* verticalLayout_5;
+    QDoubleSpinBox* doubleSpinBox_scale_x;
+    QDoubleSpinBox* doubleSpinBox_scale_y;
+    QDoubleSpinBox* doubleSpinBox_scale_z;
+    QWidget* verticalLayoutWidget_6;
+    QVBoxLayout* verticalLayout_6;
+    QLabel* label_7;
+    QLabel* label_8;
+    QLabel* label_9;
+    QPushButton* pushButton_scale;
+    QGroupBox* groupBox_5;
+    QWidget* verticalLayoutWidget_7;
+    QVBoxLayout* verticalLayout_7;
+    QDoubleSpinBox* doubleSpinBox_spin_x;
+    QDoubleSpinBox* doubleSpinBox_spin_y;
+    QDoubleSpinBox* doubleSpinBox_spin_z;
+    QWidget* verticalLayoutWidget_8;
+    QVBoxLayout* verticalLayout_8;
+    QLabel* label_10;
+    QLabel* label_11;
+    QLabel* label_12;
+    QPushButton* pushButton_spin;
+    QGroupBox* groupBox_6;
+    QPushButton* pushButton_del_model_all;
+    QComboBox* comboBox_models;
+    QPushButton* pushButton_del_model_cur;
+    QPushButton* pushButton_load_model;
+    QGroupBox* groupBox_7;
+    QGroupBox* groupBox_8;
+    QComboBox* comboBox_cameras;
+    QPushButton* pushButton_del_camera_cur;
+    QGroupBox* groupBox_9;
+    QPushButton* pushButton_camera_move_right;
+    QPushButton* pushButton_camera_move_left;
+    QPushButton* pushButton_camera_move_up;
+    QPushButton* pushButton_camera_move_down;
+    QPushButton* pushButton_add_camera;
 
-    void setupUi(QMainWindow *MainWindow)
-    {
+    void setupUi(QMainWindow* MainWindow) {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(1232, 669);
@@ -301,8 +299,7 @@ public:
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
-    {
+    void retranslateUi(QMainWindow* MainWindow) {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "\320\234\320\276\320\264\320\265\320\273\321\214", nullptr));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\274\320\265\321\211\320\265\320\275\320\270\320\265", nullptr));
@@ -334,11 +331,10 @@ public:
         pushButton_camera_move_down->setText(QApplication::translate("MainWindow", "\342\206\223", nullptr));
         pushButton_add_camera->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
     } // retranslateUi
-
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+class MainWindow : public Ui_MainWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE

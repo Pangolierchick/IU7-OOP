@@ -1,9 +1,8 @@
 #include <memory>
 
+#include <configuration/configuration_creator.h>
 #include <load_controller/model/model_load_controller_creator.h>
 #include <loader/model/model_loader_file.h>
-#include <configuration/configuration_creator.h>
-
 
 std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controller() {
     if (nullptr == _controller)
@@ -12,7 +11,7 @@ std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controll
     return _controller;
 }
 
-std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controller(const std::shared_ptr<BaseModelLoader> &loader) {
+std::shared_ptr<ModelLoadController> ModelLoadControllerCreator::create_controller(const std::shared_ptr<BaseModelLoader>& loader) {
     if (nullptr == _controller)
         create_instance();
 
@@ -28,9 +27,9 @@ void ModelLoadControllerCreator::create_instance() {
         std::shared_ptr<BaseModelLoader> loader;
 
         switch (ConfigurationCreator().get_configuration()->get_load_source()) {
-            case AbstractConfiguration::FILE:
-            default:
-                loader = std::shared_ptr<BaseModelLoader>(new FileModelLoader);
+        case AbstractConfiguration::FILE:
+        default:
+            loader = std::shared_ptr<BaseModelLoader>(new FileModelLoader);
         }
 
         controller = std::make_shared<ModelLoadController>(loader);

@@ -1,8 +1,8 @@
 #include <memory>
 
+#include <configuration/configuration_creator.h>
 #include <load_controller/scene/scene_load_controller_creator.h>
 #include <loader/scene/scene_loader_file.h>
-#include <configuration/configuration_creator.h>
 
 std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controller() {
     if (nullptr == _controller)
@@ -11,7 +11,7 @@ std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controll
     return _controller;
 }
 
-std::shared_ptr<SceneLoadController>SceneLoadControllerCreator::create_controller(const std::shared_ptr<BaseSceneLoader> &loader) {
+std::shared_ptr<SceneLoadController> SceneLoadControllerCreator::create_controller(const std::shared_ptr<BaseSceneLoader>& loader) {
     if (nullptr == _controller)
         create_instance();
 
@@ -27,9 +27,9 @@ void SceneLoadControllerCreator::create_instance() {
         std::shared_ptr<BaseSceneLoader> loader;
 
         switch (ConfigurationCreator().get_configuration()->get_load_source()) {
-            case AbstractConfiguration::FILE:
-            default:
-                loader = std::shared_ptr<BaseSceneLoader>(new FileSceneLoader);
+        case AbstractConfiguration::FILE:
+        default:
+            loader = std::shared_ptr<BaseSceneLoader>(new FileSceneLoader);
         }
 
         controller = std::make_shared<SceneLoadController>(loader);

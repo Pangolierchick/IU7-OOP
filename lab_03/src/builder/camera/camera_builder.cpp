@@ -9,7 +9,6 @@ void CameraBuilder::build() {
 }
 
 void CameraBuilder::build_position(double x, double y, double z) {
-
 }
 
 std::shared_ptr<Object> CameraBuilder::get() {

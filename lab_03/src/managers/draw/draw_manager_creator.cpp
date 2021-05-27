@@ -1,8 +1,7 @@
 #include "managers/draw/draw_manager_creator.h"
 
 std::shared_ptr<DrawManager> DrawManagerCreator::create_manager() {
-    if (_manager == nullptr)
-    {
+    if (_manager == nullptr) {
         create_instance();
     }
 

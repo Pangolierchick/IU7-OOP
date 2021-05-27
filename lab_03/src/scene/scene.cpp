@@ -1,8 +1,8 @@
-#include <iterator>
 #include "scene/scene.h"
+#include <iterator>
 #include <object/composite/composite.h>
 
-void Scene::add_model(const std::shared_ptr<Object> &model) {
+void Scene::add_model(const std::shared_ptr<Object>& model) {
     models->add(model);
 }
 
@@ -13,7 +13,7 @@ void Scene::delete_model(const std::size_t index) {
     models->remove(iter);
 }
 
-void Scene::add_camera(const std::shared_ptr<Camera> &camera) {
+void Scene::add_camera(const std::shared_ptr<Camera>& camera) {
     cameras.push_back(camera);
 }
 

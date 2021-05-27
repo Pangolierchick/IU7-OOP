@@ -1,29 +1,30 @@
 #pragma once
 
+#include <QFileDialog>
+#include <QGraphicsScene>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <QGraphicsScene>
-#include <QFileDialog>
 
 #include "command/base_command.h"
 #include "command/camera_commands.h"
 #include "command/model_commands.h"
 #include "command/scene_commands.h"
-#include "error/error.h"
 #include "drawer/abstract_drawer_factory.h"
-#include "qt/qt_drawer_factory.h"
+#include "error/error.h"
 #include "facade/facade.h"
+#include "qt/qt_drawer_factory.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
 private:
@@ -54,7 +55,7 @@ private:
     void change_cam();
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
+    void resizeEvent(QResizeEvent* event) override;
     void setup_scene();
     void update_scene();
     void check_cam_exist();
@@ -62,9 +63,9 @@ protected:
     void check_models_exist();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
 
-    QGraphicsScene *_scene;
+    QGraphicsScene* _scene;
     std::shared_ptr<Facade> _facade;
     std::shared_ptr<AbstractDrawer> _drawer;
 };

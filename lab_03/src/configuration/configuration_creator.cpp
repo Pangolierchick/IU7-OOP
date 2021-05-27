@@ -11,10 +11,8 @@ std::shared_ptr<AbstractConfiguration> ConfigurationCreator::get_configuration(s
     return _conf;
 }
 
-void ConfigurationCreator::create_instance(std::shared_ptr<std::string> &source) {
+void ConfigurationCreator::create_instance(std::shared_ptr<std::string>& source) {
     static std::shared_ptr<AbstractConfiguration> conf(new LibconfConfiguration(source));
 
     _conf = conf;
 }
-
-

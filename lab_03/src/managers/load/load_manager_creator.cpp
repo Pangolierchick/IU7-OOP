@@ -7,7 +7,7 @@ std::shared_ptr<LoadManager> LoadManagerCreator::create_manager() {
     return _manager;
 }
 
-std::shared_ptr<LoadManager> LoadManagerCreator::create_manager(const std::shared_ptr<AbstractLoadController> &loader) {
+std::shared_ptr<LoadManager> LoadManagerCreator::create_manager(const std::shared_ptr<AbstractLoadController>& loader) {
     if (nullptr == _manager)
         create_instance();
 
