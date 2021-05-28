@@ -31,6 +31,7 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN}}
           name: cpplog
           path: ./cppcheck_report.txt
           retention-days: 5
