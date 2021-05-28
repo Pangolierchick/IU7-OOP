@@ -98,9 +98,22 @@ add_executable(lab_03 main.cpp
 
 target_include_directories(${PROJECT_NAME} PRIVATE
         ./inc
-        ./src/
+        ./src
+
+        ./inc/builder
+        ./inc/command
+        ./inc/configuration
+        ./inc/drawer
+        ./inc/error
+        ./inc/facade
+        ./inc/load_controller
+        ./inc/loader
+        ./inc/managers
+        ./inc/object
+        ./inc/qt
+        ./inc/scene
         )
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} -lconfig++)
+target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED} -L/usr/local/Cellar/libconfig/1.7.2/lib -lconfig++)

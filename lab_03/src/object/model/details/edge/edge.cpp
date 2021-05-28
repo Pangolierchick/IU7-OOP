@@ -1,4 +1,4 @@
-#include <object/model/details/edge/edge.h>
+#include "object/model/details/edge/edge.h"
 
 std::size_t Edge::get_first() const {
     return index_1;

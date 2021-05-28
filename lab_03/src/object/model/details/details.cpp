@@ -1,4 +1,4 @@
-#include <object/model/details/details.h>
+#include "object/model/details/details.h"
 
 void ModelDetails::add_point(const Point& point) {
     _points.push_back(point);

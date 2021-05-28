@@ -1,4 +1,4 @@
-#include <object/composite/composite.h>
+#include "object/composite/composite.h"
 
 Composite::Composite(std::shared_ptr<Object>& component) {
     objects.push_back(component);

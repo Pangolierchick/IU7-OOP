@@ -1,6 +1,6 @@
-#include <configuration/configuration_creator.h>
+#include "configuration/configuration_creator.h"
 
-#include <configuration/libconfig_configuration.h>
+#include "configuration/libconfig_configuration.h"
 
 std::shared_ptr<AbstractConfiguration> ConfigurationCreator::get_configuration(std::shared_ptr<std::string> source) {
     if (_conf == nullptr)

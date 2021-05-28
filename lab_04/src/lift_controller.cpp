@@ -6,7 +6,9 @@ LiftController::LiftController(QObject* parent) : QObject(parent),
                                                   __curr_target(START_STATE),
                                                   __target_map(FLOORS_NUM, false),
                                                   __state(PENDING),
-                                                  __direction(NONE) {}
+                                                  __direction(NONE) {
+    QObject::connect(this, SIGNAL(controllerStopped()), this, SLOT(stop()));
+}
 
 void LiftController::newTarget(int floor) {
     __state = RUNNING;
@@ -28,50 +30,24 @@ void LiftController::newTarget(int floor) {
     emit setTarget(floor);
 }
 
-// FIXME
-void LiftController::reachedFloor(int floor) {
-    if (__state == RUNNING) {
-        __curr_floor = floor;
-        __target_map[floor - 1] = false;
-
-        if (__curr_floor == __curr_target) {
-            __curr_target = START_STATE;
-            findNewTarget();
-        }
-
-        if (nextTarget(floor)) {
-            __direction = (__curr_floor < __curr_target) ? UP : DOWN;
-
-            emit setTarget(floor);
-        } else {
-            __state = PENDING;
-        }
-    }
-}
-
-void LiftController::traversedFloor(int floor) {
-    __curr_floor = floor;
-    qDebug() << "Moving. Floor #" << floor;
-}
-
 bool LiftController::nextTarget(int& floor) {
     bool is_found = false;
-    bool first = true;
+    bool first    = true;
 
     if (__curr_floor > __curr_target) {
         for (int i = __curr_floor; i > 0 && first; i--) {
             if (__target_map[i - 1]) {
-                first = false;
+                first    = false;
                 is_found = true;
-                floor = i;
+                floor    = i;
             }
         }
     } else {
         for (int i = __curr_floor; i < FLOORS_NUM && first; i++) {
             if (__target_map[i - 1]) {
-                first = false;
+                first    = false;
                 is_found = true;
-                floor = i;
+                floor    = i;
             }
         }
     }
@@ -79,18 +55,21 @@ bool LiftController::nextTarget(int& floor) {
     return is_found;
 }
 
-void LiftController::findNewTarget() {
-    if (__direction == DOWN) {
-        for (int i = FLOORS_NUM; i > 0; i--) {
-            if (__target_map[i - 1]) {
-                __curr_target = i;
-            }
-        }
+void LiftController::run(int floor) {
+    __curr_floor = floor;
+    __target_map[floor - 1] = false;
+
+    if (nextTarget(floor)) {
+        __direction = (__curr_floor < __curr_target) ? UP : DOWN;
+        __state = RUNNING;
+
+        emit setTarget(floor);
     } else {
-        for (int i = 1; i < FLOORS_NUM; i++) {
-            if (__target_map[i - 1]) {
-                __curr_target = i;
-            }
-        }
+        emit controllerStopped();
     }
+}
+
+void LiftController::stop() {
+    if (__state == RUNNING)
+        __state = PENDING;
 }

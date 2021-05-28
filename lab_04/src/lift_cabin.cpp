@@ -31,6 +31,8 @@ void LiftCabin::cabinMove() {
         } else if (__state == MOVING) {
             __curr_floor += __direction;
 
+            qDebug() << "Current floor #" << __curr_floor;
+
             if (__curr_floor == __target_floor) {
                 emit cabinReachedFloor(__curr_floor);
             } else {

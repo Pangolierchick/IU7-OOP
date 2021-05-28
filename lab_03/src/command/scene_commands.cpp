@@ -1,9 +1,9 @@
-#include <command/scene_commands.h>
-#include <load_controller/scene/scene_load_controller_creator.h>
-#include <managers/draw/draw_manager_creator.h>
-#include <managers/load/load_manager_creator.h>
-#include <managers/scene/scene_manager.h>
-#include <managers/scene/scene_manager_creator.h>
+#include "command/scene_commands.h"
+#include "load_controller/scene/scene_load_controller_creator.h"
+#include "managers/draw/draw_manager_creator.h"
+#include "managers/load/load_manager_creator.h"
+#include "managers/scene/scene_manager.h"
+#include "managers/scene/scene_manager_creator.h"
 #include <utility>
 
 DrawScene::DrawScene(std::shared_ptr<AbstractDrawer> drawer) : _drawer(std::move(drawer)) {

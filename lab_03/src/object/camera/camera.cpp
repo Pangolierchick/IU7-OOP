@@ -1,4 +1,4 @@
-#include <object/camera/camera.h>
+#include "object/camera/camera.h"
 
 void Camera::transform(const Point& new_position, const Point& scale, const Point& rotate) {
     move_x(new_position.get_x());

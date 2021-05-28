@@ -17,19 +17,19 @@ public:
 
 signals:
     void setTarget(int floor);
+    void controllerStopped();
 
 public slots:
-    void reachedFloor(int floor);
-    void traversedFloor(int floor);
+    void run(int floor);
+    void stop();
 
 private:
     int __curr_floor;
     int __curr_target = 0;
 
-    QVector<bool> __target_map;
+    QVector<bool>   __target_map;
     ControllerState __state;
-    MoveDirection __direction;
+    MoveDirection   __direction;
 
     bool nextTarget(int& floor);
-    void findNewTarget();
 };

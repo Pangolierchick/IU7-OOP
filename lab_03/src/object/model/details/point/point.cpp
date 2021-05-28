@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 
 #include <cmath>
-#include <object/model/details/point/point.h>
+#include "object/model/details/point/point.h"
 
 Point::Point(const Point&& point) noexcept : _x(point._x), _y(point._y), _z(point._z) {
     point.~Point();

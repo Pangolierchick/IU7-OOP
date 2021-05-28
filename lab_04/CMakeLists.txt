@@ -42,6 +42,6 @@ set(PROJECT_SOURCES
         ${SOURCE_DIR}/main.cpp
 )
 
-add_executable(lab_04 ${PROJECT_SOURCES})
+add_executable(main ${PROJECT_SOURCES})
 
-target_link_libraries(lab_04 Qt5::Widgets)
+target_link_libraries(main Qt5::Widgets)

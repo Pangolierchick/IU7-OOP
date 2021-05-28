@@ -1,6 +1,6 @@
-#include <configuration/libconfig_configuration.h>
+#include "configuration/libconfig_configuration.h"
 
-#include <error/error.h>
+#include "error/error.h"
 #include <sstream>
 
 LibconfConfiguration::LibconfConfiguration(std::shared_ptr<std::string>& source) : AbstractConfiguration(source) {}

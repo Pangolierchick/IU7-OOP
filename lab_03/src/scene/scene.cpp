@@ -1,6 +1,6 @@
 #include "scene/scene.h"
 #include <iterator>
-#include <object/composite/composite.h>
+#include "object/composite/composite.h"
 
 void Scene::add_model(const std::shared_ptr<Object>& model) {
     models->add(model);

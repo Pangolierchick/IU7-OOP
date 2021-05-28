@@ -1,8 +1,8 @@
-#include <object/camera/camera.h>
+#include "object/camera/camera.h"
 
-#include <command/camera_commands.h>
-#include <managers/scene/scene_manager_creator.h>
-#include <managers/transform/transform_manager_creator.h>
+#include "command/camera_commands.h"
+#include "managers/scene/scene_manager_creator.h"
+#include "managers/transform/transform_manager_creator.h"
 
 AddCamera::AddCamera(const double x, const double y, const double z) : x_pos(x), y_pos(y), z_pos(z) {}
 

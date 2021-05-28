@@ -3,7 +3,7 @@
 #include <QScreen>
 #include <QStyle>
 
-#include <configuration/configuration_creator.h>
+#include "configuration/configuration_creator.h"
 
 #include "design.h"
 

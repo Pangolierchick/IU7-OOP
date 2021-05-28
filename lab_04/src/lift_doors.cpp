@@ -2,7 +2,7 @@
 #include "defines.h"
 #include <qdebug>
 
-LiftDoors::LiftDoors(QObject* parent) : QObject(parent), __state(CLOSED) {
+LiftDoors::LiftDoors(QObject* parent) : QObject(parent), __state(OPEN) {
     __open_timer.setSingleShot(true);
     __close_timer.setSingleShot(true);
 
@@ -31,8 +31,6 @@ void LiftDoors::closing() {
 
         __state = CLOSING;
         __close_timer.start(DOORS_MOVING_TIME);
-    } else if (__state == CLOSED) {
-        emit closedDoors();
     }
 }
 

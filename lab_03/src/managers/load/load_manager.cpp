@@ -1,9 +1,9 @@
 #include <utility>
 
-#include <load_controller/model/model_load_controller.h>
-#include <load_controller/scene/scene_load_controller_creator.h>
-#include <loader/model/model_loader_file.h>
-#include <managers/load/load_manager.h>
+#include "load_controller/model/model_load_controller.h"
+#include "load_controller/scene/scene_load_controller_creator.h"
+#include "loader/model/model_loader_file.h"
+#include "managers/load/load_manager.h"
 
 LoadManager::LoadManager() {
     _loader = SceneLoadControllerCreator().create_controller();

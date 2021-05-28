@@ -1,7 +1,7 @@
 #include "managers/draw/draw_manager.h"
 
-#include <object/camera/camera.h>
-#include <object/model/model.h>
+#include "object/camera/camera.h"
+#include "object/model/model.h"
 
 void DrawManager::visit(const Model& model) {
     auto points = model._details->get_points();
