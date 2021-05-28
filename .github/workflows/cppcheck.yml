@@ -27,6 +27,9 @@ jobs:
 
       - name: publish report    
         uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'main'
       
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
@@ -35,6 +38,3 @@ jobs:
           name: cpplog
           path: ./cppcheck_report.txt
           retention-days: 5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'main' # your branch name goes here
