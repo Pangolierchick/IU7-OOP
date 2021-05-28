@@ -24,12 +24,6 @@ jobs:
           std: c++17
           output_file: ./cppcheck_report.txt
           other_options: disable
-
-      - name: publish report    
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: 'master'
       
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
