@@ -1,6 +1,6 @@
 #include "qdebug.h"
 
-#include "ui_mainwindow.h"
+#include "build/main_autogen_include/ui_mainwindow.h"
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),
