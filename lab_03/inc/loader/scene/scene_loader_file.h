@@ -8,9 +8,9 @@ public:
 
     ~FileSceneLoader() override = default;
 
-    std::shared_ptr<Object> load(const std::shared_ptr<SceneBuilder> &builder) override;
+    std::shared_ptr<Object> load(const std::shared_ptr<SceneBuilder>& builder) override;
 
-    void open(std::string &filename) override;
+    void open(std::string& filename) override;
 
 protected:
     std::shared_ptr<std::ifstream> file;
@@ -18,4 +18,3 @@ protected:
     void load_models(std::shared_ptr<SceneBuilder> builder) override;
     void load_cameras(std::shared_ptr<SceneBuilder> builder) override;
 };
-

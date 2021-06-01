@@ -13,6 +13,3 @@ private:
 
     std::shared_ptr<SceneManager> _manager;
 };
-
-
-

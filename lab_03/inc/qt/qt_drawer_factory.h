@@ -7,16 +7,15 @@
 #include "drawer/abstract_drawer_factory.h"
 #include "qt/qt_drawer.h"
 
-
 class QtDrawerFactory : public AbstractDrawerFactory {
 public:
-    explicit QtDrawerFactory(QGraphicsScene *scene);
+    explicit QtDrawerFactory(QGraphicsScene* scene);
 
     std::unique_ptr<AbstractDrawer> create_graphic() override {
         return std::unique_ptr<AbstractDrawer>(new QtDrawer(_scene));
     }
 
 private:
-    QGraphicsScene *_scene;
+    QGraphicsScene* _scene;
     std::shared_ptr<AbstractConfiguration> _conf;
 };

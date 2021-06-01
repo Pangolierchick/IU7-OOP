@@ -7,7 +7,7 @@ class TransformManager : public BaseManager {
 public:
     TransformManager() = default;
     TransformManager(const TransformManager&) = delete;
-    TransformManager& operator = (const TransformManager&) = delete;
+    TransformManager& operator=(const TransformManager&) = delete;
 
     ~TransformManager() = default;
 

@@ -22,7 +22,7 @@ private:
 class RemoveCamera : public CameraBaseCommand {
 public:
     RemoveCamera() = delete;
-    explicit RemoveCamera(const std::size_t &camera_number);
+    explicit RemoveCamera(const std::size_t& camera_number);
     ~RemoveCamera() override = default;
 
     void execute() override;
@@ -34,7 +34,7 @@ private:
 class MoveCamera : public CameraBaseCommand {
 public:
     MoveCamera() = delete;
-    MoveCamera(const std::size_t &camera_number, const double &dx, const double &dy);
+    MoveCamera(const std::size_t& camera_number, const double& dx, const double& dy);
     ~MoveCamera() override = default;
 
     void execute() override;
@@ -48,11 +48,10 @@ private:
 class SetCamera : public CameraBaseCommand {
 public:
     SetCamera() = delete;
-    explicit SetCamera(const std::size_t &camera_number);
+    explicit SetCamera(const std::size_t& camera_number);
     ~SetCamera() override = default;
 
     void execute() override;
-
 
 private:
     std::size_t _camera_number;
@@ -61,12 +60,11 @@ private:
 class CameraCount : public CameraBaseCommand {
 public:
     CameraCount() = delete;
-    explicit CameraCount(std::shared_ptr<size_t> &count);
+    explicit CameraCount(std::shared_ptr<size_t>& count);
     ~CameraCount() override = default;
 
     void execute() override;
 
 private:
-    std::shared_ptr<size_t> &_count;
+    std::shared_ptr<size_t>& _count;
 };
-

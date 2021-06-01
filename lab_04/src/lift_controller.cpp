@@ -32,22 +32,22 @@ void LiftController::newTarget(int floor) {
 
 bool LiftController::nextTarget(int& floor) {
     bool is_found = false;
-    bool first    = true;
+    bool first = true;
 
     if (__curr_floor > __curr_target) {
         for (int i = __curr_floor; i > 0 && first; i--) {
             if (__target_map[i - 1]) {
-                first    = false;
+                first = false;
                 is_found = true;
-                floor    = i;
+                floor = i;
             }
         }
     } else {
         for (int i = __curr_floor; i < FLOORS_NUM && first; i++) {
             if (__target_map[i - 1]) {
-                first    = false;
+                first = false;
                 is_found = true;
-                floor    = i;
+                floor = i;
             }
         }
     }

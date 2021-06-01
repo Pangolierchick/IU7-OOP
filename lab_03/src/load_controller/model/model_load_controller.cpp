@@ -1,5 +1,5 @@
-#include "error/error.h"
 #include "load_controller/model/model_load_controller.h"
+#include "error/error.h"
 
 std::shared_ptr<Object> ModelLoadController::load(std::string& filename) {
     try {

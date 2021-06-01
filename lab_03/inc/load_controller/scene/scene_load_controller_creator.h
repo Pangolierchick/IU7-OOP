@@ -5,7 +5,7 @@
 class SceneLoadControllerCreator {
 public:
     std::shared_ptr<SceneLoadController> create_controller();
-    std::shared_ptr<SceneLoadController> create_controller(const std::shared_ptr<BaseSceneLoader> &loader);
+    std::shared_ptr<SceneLoadController> create_controller(const std::shared_ptr<BaseSceneLoader>& loader);
 
 private:
     void create_instance();

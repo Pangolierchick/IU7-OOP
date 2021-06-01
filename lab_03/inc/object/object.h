@@ -1,15 +1,15 @@
 #pragma once
 
-#include <memory>
-#include <vector>
 #include "object/model/details/point/point.h"
 #include "visitor.h"
+#include <memory>
+#include <vector>
 
 class Object;
 
 using Iterator = std::vector<std::shared_ptr<Object>>::iterator;
 
-class Object{
+class Object {
 public:
     Object() = default;
     virtual ~Object() = default;

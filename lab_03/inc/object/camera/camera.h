@@ -1,16 +1,15 @@
 #pragma once
 
+#include "managers/draw/draw_manager.h"
 #include "object/object.h"
 #include "visitor.h"
-#include "managers/draw/draw_manager.h"
 
-class Camera : public InvisibleObject
-{
-    friend Point DrawManager::point_proection(const Point &point);
+class Camera : public InvisibleObject {
+    friend Point DrawManager::point_proection(const Point& point);
 
 public:
     Camera() = default;
-    explicit Camera(const Point& position) : current_position(position) {};
+    explicit Camera(const Point& position) : current_position(position){};
 
     ~Camera() override = default;
 

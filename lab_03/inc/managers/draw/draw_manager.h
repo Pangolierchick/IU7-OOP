@@ -2,12 +2,12 @@
 
 #include <memory>
 
-#include "visitor.h"
-#include "managers/base_manager.h"
 #include "drawer/abstract_drawer.h"
+#include "managers/base_manager.h"
 #include "object/composite/composite.h"
-#include "object/object.h"
 #include "object/model/details/point/point.h"
+#include "object/object.h"
+#include "visitor.h"
 
 class Camera;
 
@@ -16,7 +16,7 @@ public:
     DrawManager() = default;
     DrawManager(const DrawManager&) = delete;
 
-    DrawManager& operator = (const DrawManager&) = delete;
+    DrawManager& operator=(const DrawManager&) = delete;
 
     ~DrawManager() = default;
 
@@ -33,4 +33,3 @@ private:
     std::shared_ptr<AbstractDrawer> _drawer;
     std::shared_ptr<Camera> _camera;
 };
-

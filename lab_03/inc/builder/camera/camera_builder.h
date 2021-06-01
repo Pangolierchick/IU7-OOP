@@ -18,5 +18,3 @@ public:
 private:
     std::shared_ptr<Camera> camera_pointer;
 };
-
-
