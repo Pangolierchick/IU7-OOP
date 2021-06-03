@@ -30,8 +30,8 @@ public slots:
     void cabinCall(int floor);
 
 private:
-    int  __curr_floor;
-    int  __target_floor;
+    int __curr_floor;
+    int __target_floor;
     bool __new_target;
 
     CabinState __state;

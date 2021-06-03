@@ -40,7 +40,6 @@ bool LiftController::nextTarget(int& floor) {
     return is_found;
 }
 
-
 void LiftController::newTarget(int floor) {
     __state = RUNNING;
     __target_map[floor - 1] = true;
@@ -75,7 +74,7 @@ void LiftController::run(int floor) {
 void LiftController::stop() {
     if (__state == RUNNING)
         __state = PENDING;
-    
+
     if (__state == SEARCHING)
         __state = PENDING;
 }
