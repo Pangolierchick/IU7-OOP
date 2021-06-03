@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include "object/object.h"
+#include <vector>
 
 class Scene : public Object {
 public:
@@ -24,7 +24,6 @@ protected:
     std::vector<std::shared_ptr<Camera>> cameras;
 
 private:
-    void accept(std::shared_ptr<Visitor> visitor) override {};
-    void transform(const Point& move, const Point& scale, const Point& rotate) override {};
+    void accept(std::shared_ptr<Visitor> visitor) override{};
+    void transform(const Point& move, const Point& scale, const Point& rotate) override{};
 };
-

@@ -6,13 +6,13 @@
 class BaseError : public std::exception {
 public:
     BaseError() = default;
-    explicit BaseError(std::string &message) : error_info(message){};
+    explicit BaseError(std::string& message) : error_info(message){};
 
-    const char *what() const noexcept override {
+    const char* what() const noexcept override {
         return "Something wrong with viewer.";
     }
 
-    const std::string &get_info() const noexcept {
+    const std::string& get_info() const noexcept {
         return error_info;
     }
 
@@ -23,9 +23,9 @@ protected:
 class CameraError : public BaseError {
 public:
     CameraError() = default;
-    explicit CameraError(std::string &message) : BaseError(message){};
+    explicit CameraError(std::string& message) : BaseError(message){};
 
-    const char *what() const noexcept override {
+    const char* what() const noexcept override {
         return "Camera doesn't set.";
     }
 };
@@ -33,9 +33,9 @@ public:
 class SourceError : public BaseError {
 public:
     SourceError() = default;
-    explicit SourceError(std::string &message) : BaseError(message){};
+    explicit SourceError(std::string& message) : BaseError(message){};
 
-    const char *what() const noexcept override {
+    const char* what() const noexcept override {
         return "Load corrupt or does not exist.";
     }
 };
@@ -43,9 +43,9 @@ public:
 class ModelError : public BaseError {
 public:
     ModelError() = default;
-    explicit ModelError(std::string &message) : BaseError(message){};
+    explicit ModelError(std::string& message) : BaseError(message){};
 
-    const char *what() const noexcept override {
+    const char* what() const noexcept override {
         return "Error while building model.";
     }
 };
@@ -53,9 +53,9 @@ public:
 class FileError : public SourceError {
 public:
     FileError() = default;
-    explicit FileError(std::string &message) : SourceError(message){};
+    explicit FileError(std::string& message) : SourceError(message){};
 
-    const char *what() const noexcept override {
+    const char* what() const noexcept override {
         return error_info.c_str();
     }
 };

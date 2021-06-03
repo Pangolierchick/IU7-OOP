@@ -5,7 +5,7 @@
 
 class BaseSceneLoader : public BaseLoader {
 public:
-    virtual std::shared_ptr<Object> load(const std::shared_ptr<SceneBuilder> &builder) = 0;
+    virtual std::shared_ptr<Object> load(const std::shared_ptr<SceneBuilder>& builder) = 0;
 
 protected:
     virtual void load_models(std::shared_ptr<SceneBuilder> builder) = 0;

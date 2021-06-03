@@ -1,8 +1,8 @@
+#include "loader/scene/scene_loader_file.h"
 #include "builder/scene/scene_builder.h"
 #include "error/error.h"
 #include "loader/camera/camera_loader_file.h"
 #include "loader/model/model_loader_file.h"
-#include "loader/scene/scene_loader_file.h"
 
 FileSceneLoader::FileSceneLoader() : file(std::make_shared<std::ifstream>()) {}
 

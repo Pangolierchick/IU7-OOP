@@ -3,7 +3,6 @@
 #include "builder/base_builder.h"
 #include "scene/scene.h"
 
-
 class SceneBuilder : public BaseBuilder {
 public:
     SceneBuilder() = default;
@@ -21,5 +20,3 @@ public:
 private:
     std::shared_ptr<Scene> scene_pointer;
 };
-
-

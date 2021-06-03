@@ -8,4 +8,3 @@ class AbstractDrawerFactory {
 public:
     virtual std::unique_ptr<AbstractDrawer> create_graphic() = 0;
 };
-

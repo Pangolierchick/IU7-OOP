@@ -10,12 +10,12 @@
 class LoadManager : public BaseManager {
 public:
     LoadManager();
-    LoadManager(const LoadManager &) = delete;
-    LoadManager &operator=(const LoadManager &) = delete;
+    LoadManager(const LoadManager&) = delete;
+    LoadManager& operator=(const LoadManager&) = delete;
 
     ~LoadManager() = default;
 
-    virtual std::shared_ptr<Object> load(std::string &name);
+    virtual std::shared_ptr<Object> load(std::string& name);
     virtual void set_loader(std::shared_ptr<AbstractLoadController> loader);
 
 private:

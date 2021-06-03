@@ -12,10 +12,9 @@ public:
 
     ~AbstractLoadController() = default;
 
-    virtual std::shared_ptr<Object> load(std::string &name) = 0;
+    virtual std::shared_ptr<Object> load(std::string& name) = 0;
     virtual void set_loader(std::shared_ptr<BaseLoader> loader);
 
 protected:
     std::shared_ptr<BaseLoader> _loader;
 };
-

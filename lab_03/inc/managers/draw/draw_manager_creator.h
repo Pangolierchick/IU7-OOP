@@ -1,7 +1,7 @@
 #pragma once
 
-#include <memory>
 #include "draw_manager.h"
+#include <memory>
 
 class DrawManagerCreator {
 public:
@@ -11,5 +11,3 @@ private:
     void create_instance();
     std::shared_ptr<DrawManager> _manager;
 };
-
-

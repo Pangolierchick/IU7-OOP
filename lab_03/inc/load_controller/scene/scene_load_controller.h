@@ -13,7 +13,7 @@ public:
 
     ~SceneLoadController() = default;
 
-    std::shared_ptr<Object> load(std::string &filename) override;
+    std::shared_ptr<Object> load(std::string& filename) override;
 
 private:
     std::shared_ptr<SceneBuilder> _builder;

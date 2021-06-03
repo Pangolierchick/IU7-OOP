@@ -6,13 +6,12 @@
 #include "command/base_command.h"
 #include "object/object.h"
 
-
 class ModelBaseCommand : public BaseCommand {};
 
 class MoveModel : public ModelBaseCommand {
 public:
     MoveModel() = delete;
-    MoveModel(const double &dx, const double &dy, const double &dz, const std::size_t& model_number);
+    MoveModel(const double& dx, const double& dy, const double& dz, const std::size_t& model_number);
     ~MoveModel() override = default;
 
     void execute() override;
@@ -26,7 +25,7 @@ private:
 class ScaleModel : public ModelBaseCommand {
 public:
     ScaleModel() = delete;
-    ScaleModel(const double &kx, const double &ky, const double &kz, const std::size_t& model_number);
+    ScaleModel(const double& kx, const double& ky, const double& kz, const std::size_t& model_number);
     ~ScaleModel() override = default;
 
     void execute() override;
@@ -40,7 +39,7 @@ private:
 class RotateModel : public ModelBaseCommand {
 public:
     RotateModel() = delete;
-    RotateModel(const double &ox, const double &oy, const double &oz, const std::size_t& model_number);
+    RotateModel(const double& ox, const double& oy, const double& oz, const std::size_t& model_number);
     ~RotateModel() override = default;
 
     void execute() override;
@@ -54,7 +53,7 @@ private:
 class ReformModel : public ModelBaseCommand {
 public:
     ReformModel() = delete;
-    ReformModel(const std::size_t &number, const Point &move, const Point &scale, const Point &rotate);
+    ReformModel(const std::size_t& number, const Point& move, const Point& scale, const Point& rotate);
     ~ReformModel() override = default;
 
     void execute() override;

@@ -13,5 +13,3 @@ public:
 
     virtual std::shared_ptr<Object> get() = 0;
 };
-
-

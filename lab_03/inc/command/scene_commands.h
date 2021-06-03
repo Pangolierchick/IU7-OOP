@@ -6,9 +6,7 @@
 #include "drawer/abstract_drawer.h"
 #include "object/object.h"
 
-
 class SceneBaseCommand : public BaseCommand {};
-
 
 class DrawScene : public SceneBaseCommand {
 public:

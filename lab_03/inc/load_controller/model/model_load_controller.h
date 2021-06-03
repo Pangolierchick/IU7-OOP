@@ -12,7 +12,7 @@ public:
     explicit ModelLoadController(std::shared_ptr<BaseModelLoader> _loader) : _builder(new ModelBuilder), _loader(std::move(_loader)){};
     ~ModelLoadController() = default;
 
-    std::shared_ptr<Object> load(std::string &filename) override;
+    std::shared_ptr<Object> load(std::string& filename) override;
 
 private:
     std::shared_ptr<ModelBuilder> _builder;

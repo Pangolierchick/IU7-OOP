@@ -1,8 +1,8 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <utility>
-#include <memory>
 
 class AbstractConfiguration {
 public:
@@ -21,4 +21,3 @@ public:
 protected:
     std::shared_ptr<std::string> _source;
 };
-
