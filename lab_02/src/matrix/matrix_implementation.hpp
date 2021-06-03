@@ -3,6 +3,7 @@
 #include "matrix.h"
 
 #include <iostream> // for endl
+#include <initializer_list>
 
 template <typename T>
 Matrix<T>::Matrix() {
@@ -26,7 +27,7 @@ Matrix<T>::Matrix(T** m, size_t row, size_t clm) {
 
     try {
         this->data = std::shared_ptr<T>(new T[this->elem_num]);
-    } catch (std::bad_alloc) {
+	} catch (std::bad_alloc&) {
         throw badAllocException(__FILE__, typeid(*this).name(), __LINE__,
                                 time(nullptr),
                                 "Bad alloc");

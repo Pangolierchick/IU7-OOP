@@ -8,6 +8,7 @@ class LiftController : public QObject {
 
     enum ControllerState {
         RUNNING,
+        SEARCHING,
         PENDING,
     };
 
@@ -18,10 +19,12 @@ public:
 signals:
     void setTarget(int floor);
     void controllerStopped();
+    void searchTarget(int floor);
 
 public slots:
     void run(int floor);
     void stop();
+    void set(int floor);
 
 private:
     int __curr_floor;

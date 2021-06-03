@@ -8,26 +8,7 @@ LiftController::LiftController(QObject* parent) : QObject(parent),
                                                   __state(PENDING),
                                                   __direction(NONE) {
     QObject::connect(this, SIGNAL(controllerStopped()), this, SLOT(stop()));
-}
-
-void LiftController::newTarget(int floor) {
-    __state = RUNNING;
-    __target_map[floor - 1] = true;
-
-    if (__curr_target == START_STATE) {
-        __curr_target = floor;
-    }
-
-    if ((__direction == UP && __curr_floor < floor) || (__direction == DOWN && __curr_floor > floor)) {
-        __curr_target = floor;
-    }
-
-    if (__curr_floor < __curr_target)
-        __direction = UP;
-    else
-        __direction = DOWN;
-
-    emit setTarget(floor);
+    QObject::connect(this, SIGNAL(searchTarget(int)), this, SLOT(set(int)));
 }
 
 bool LiftController::nextTarget(int& floor) {
@@ -52,24 +33,60 @@ bool LiftController::nextTarget(int& floor) {
         }
     }
 
+    if (!is_found) {
+        emit controllerStopped();
+    }
+
     return is_found;
 }
 
+
+void LiftController::newTarget(int floor) {
+    __state = RUNNING;
+    __target_map[floor - 1] = true;
+
+    if (__curr_target == START_STATE) {
+        __curr_target = floor;
+    }
+
+    if ((__direction == UP && __curr_floor < floor) || (__direction == DOWN && __curr_floor > floor)) {
+        __curr_target = floor;
+    }
+
+    if (__curr_floor < __curr_target)
+        __direction = UP;
+    else
+        __direction = DOWN;
+
+    emit setTarget(floor);
+}
+
 void LiftController::run(int floor) {
-    __curr_floor = floor;
-    __target_map[floor - 1] = false;
+    if (__state == RUNNING) {
+        __curr_floor = floor;
+        __target_map[floor - 1] = false;
 
-    if (nextTarget(floor)) {
-        __direction = (__curr_floor < __curr_target) ? UP : DOWN;
-        __state = RUNNING;
+        __state = SEARCHING;
 
-        emit setTarget(floor);
-    } else {
-        emit controllerStopped();
+        emit searchTarget(floor);
     }
 }
 
 void LiftController::stop() {
     if (__state == RUNNING)
         __state = PENDING;
+    
+    if (__state == SEARCHING)
+        __state = PENDING;
+}
+
+void LiftController::set(int floor) {
+    if (__state == SEARCHING) {
+        if (nextTarget(floor)) {
+            __direction = (__curr_floor < __curr_target) ? UP : DOWN;
+            __state = RUNNING;
+
+            emit setTarget(floor);
+        }
+    }
 }
